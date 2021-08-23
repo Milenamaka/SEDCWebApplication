@@ -1,14 +1,18 @@
 ﻿@model ProductDTO
 
-<div class="card" style="width: 18rem;">
-    <div class="card-header">
-        <h2>@Model.ProductName</h2>
+<div class="container">
+    <!--<a asp-controller="product" asp-action="update">Update product</a>-->
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <h2>@Model.ProductName</h2>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: @Model.Id</li>
+            <li class="list-group-item"> PRICE: @Model.UnitPrice RSD</li>
+            <li class="list-group-item"> SIZE: @Model.Size</li>
+            @{String discount = Model.IsDiscounted ? "Discounted Now!!!" : " ";}
+            <li class="list-group-item " id="red"> @discount</li>
+        </ul>
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID: @Model.Id</li>
-        <li class="list-group-item"> PRICE: @Model.UnitPrice RSD</li>
-        <li class="list-group-item"> SIZE: @Model.Size</li>
-        @{String discount =Model.IsDiscounted ? "Discounted Now!!!" : " ";}
-        <li class="list-group-item " id="red"> @discount</li>
-    </ul>
 </div>

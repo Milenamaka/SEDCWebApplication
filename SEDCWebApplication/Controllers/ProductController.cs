@@ -76,6 +76,25 @@ namespace SEDCWebApplication.Controllers
             }
 
         }
+
+      /*  [HttpGet]
+        public IActionResult Update()
+        {
+            return View();
+        }
+
+        [HttpPut]
+        public IActionResult Update(int id)
+        {
+            if (ModelState.IsValid) {
+                Product product = _productRepository.GetById(id);
+                return RedirectToAction("Details", new { id = product.Id });
+            }
+            else {
+                return View();
+            }
+
+        }*/
     }
 
 }
