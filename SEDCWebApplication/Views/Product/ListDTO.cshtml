@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ProductDTO>
+    <a asp-controller="product" asp-action="create">Create New</a>
+    <div class="container">
+        <div class="card-columns">
+            @foreach (var productDTO in Model)
+            {
+
+                <div class="card card-user">
+                    <img class="card-img-top" src="@productDTO.ImagePath" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">@productDTO.ProductName</h4>
+                        <p class="card-text">@productDTO.Description</p>
+                        <a asp-controller="product" asp-action="details" asp-route-id="@productDTO.Id">See Details</a>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+    </div>
