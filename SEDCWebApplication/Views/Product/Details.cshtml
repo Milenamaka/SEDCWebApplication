@@ -1,7 +1,7 @@
 ﻿@model ProductDTO
 
 <div class="container">
-    <!--<a asp-controller="product" asp-action="update">Update product</a>-->
+    <a asp-controller="product" asp-action="update" asp-route-id="@Model.Id">Update product</a>
 
     <div class="card" style="width: 18rem;">
         <div class="card-header">

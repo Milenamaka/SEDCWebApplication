@@ -76,25 +76,31 @@ namespace SEDCWebApplication.Controllers
             }
 
         }
-
-      /*  [HttpGet]
-        public IActionResult Update()
-        {
-            return View();
-        }
-
-        [HttpPut]
+        [Route("Update/{id}")]
+        [HttpGet]
         public IActionResult Update(int id)
         {
+            Product product = _productRepository.GetById(id);
+            return View(product);
+        }
+        [Route("Update/{Product changedProduct}")]
+        [HttpPost]
+        public IActionResult Update(Product changedProduct)
+        {
             if (ModelState.IsValid) {
-                Product product = _productRepository.GetById(id);
-                return RedirectToAction("Details", new { id = product.Id });
+                Product product = _productRepository.GetById(changedProduct.Id);
+
+                product.ProductName = changedProduct.ProductName;
+                product.UnitPrice = changedProduct.UnitPrice;
+                product.IsDiscounted = changedProduct.IsDiscounted;
+                product.Size = changedProduct.Size;
+                return RedirectToAction("Details", new { id = changedProduct.Id });
             }
             else {
                 return View();
             }
 
-        }*/
+        }
     }
 
 }
