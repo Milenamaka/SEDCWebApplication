@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SEDCWebApplication.Models;
 using SEDCWebApplication.Models.IRepository;
@@ -13,21 +15,16 @@ namespace SEDCWebApplication.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
-
-        public ProductController(IProductRepository productRepository)
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public ProductController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment)
         {
             _productRepository = productRepository;
+            _hostingEnvironment = hostingEnvironment;
         }
         [Route("ListDTO")]
         public IActionResult ListDTO()
         {
             List<Product> products = _productRepository.GetAllProducts().ToList();
-
-            /*ViewBag.Customers = customers;
-            ViewData["Customers"] = customers;
-            ViewBag.Title = customers;
-            ViewData["Title"] = "Customers";*/
-
             List<ProductDTO> productVM = new List<ProductDTO>();
             foreach (Product product in products) {
                 ProductDTO productdto = new ProductDTO();
@@ -65,9 +62,28 @@ namespace SEDCWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductCreateDTO model)
         {
             if (ModelState.IsValid) {
+                string uniqueFileName = "logoPizza.png";
+
+                if (model.Photo != null) {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+
+                Product product = new Product {
+                    ProductName = model.ProductName,
+                    Size = model.Size,
+                    UnitPrice = model.UnitPrice,
+                    Description = model.Description,
+                    IsDiscounted = model.IsDiscounted,
+                    ImagePath = "/img/" + uniqueFileName
+                }; 
                 Product newProduct = _productRepository.Add(product);
                 return RedirectToAction("Details", new { id = newProduct.Id });
             }
