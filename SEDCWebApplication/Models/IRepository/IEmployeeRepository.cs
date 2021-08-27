@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEDCWebApplication.BLL.logic.Models;
 
 namespace SEDCWebApplication.Models.IRepository
 {
     public interface IEmployeeRepository
     {
-        List<Employee> GetAllEmplyees();
+        IEnumerable<EmployeeDTO> GetAllEmployees();
 
-        Employee GetById(int id);
-        Employee Add(Employee employee);
+        EmployeeDTO GetEmployeeById(int id);
+        EmployeeDTO Add(EmployeeDTO employee);
     }
 }

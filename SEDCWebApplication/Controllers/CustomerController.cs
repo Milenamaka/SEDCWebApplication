@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.Models;
 using SEDCWebApplication.Models.IRepository;
 using SEDCWebApplication.ViewModels;
@@ -13,19 +15,24 @@ namespace SEDCWebApplication.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public CustomerController(ICustomerRepository customerRepository)
+
+        public CustomerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
         {
-            _customerRepository = customerRepository;       
+
+
+            _customerRepository = customerRepository;
+            _hostingEnvironment = hostingEnvironment;
         }
         [Route("ListDTO")]
         public IActionResult ListDTO()
         {
-            List<Customer> customers = _customerRepository.GetAllCustomers().ToList();
+            List<CustomerDTO> customers = _customerRepository.GetAllCustomers().ToList();
 
-            List<CustomerDTO> customersVM = new List<CustomerDTO>();
-            foreach (Customer customer in customers) {
-                CustomerDTO customerdto = new CustomerDTO();
+            List<CustomerCreateViewModel> customersVM = new List<CustomerCreateViewModel>();
+            foreach (CustomerDTO customer in customers) {
+                CustomerCreateViewModel customerdto = new CustomerCreateViewModel();
                 customerdto.Id = customer.Id;
                 customerdto.Name = customer.Name;
                 customerdto.Address = customer.Address;
@@ -40,8 +47,8 @@ namespace SEDCWebApplication.Controllers
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            Customer customer = _customerRepository.GetById(id);
-            CustomerDTO customerdto = new CustomerDTO();
+            CustomerDTO customer = _customerRepository.GetById(id);
+            CustomerCreateViewModel customerdto = new CustomerCreateViewModel();
             customerdto.Id = customer.Id;
             customerdto.Name = customer.Name;
             customerdto.Address = customer.Address;
@@ -58,10 +65,10 @@ namespace SEDCWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create(CustomerDTO customer)
         {
             if (ModelState.IsValid) {
-                Customer newCustomer = _customerRepository.Add(customer);
+                CustomerDTO newCustomer = _customerRepository.Add(customer);
                 return RedirectToAction("Details", new { id = newCustomer.Id });
             }
             else {

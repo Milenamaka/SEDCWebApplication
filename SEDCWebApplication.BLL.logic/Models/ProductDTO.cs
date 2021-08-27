@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
-namespace SEDCWebApplication.ViewModels
+namespace SEDCWebApplication.BLL.logic.Models
 {
-    public class ProductCreateDTO
+    public class ProductDTO
     {
-        public IFormFile Photo { get; set; }
         [Required]
         public string ProductName { get; set; }
 
@@ -17,9 +15,15 @@ namespace SEDCWebApplication.ViewModels
 
         public int UnitPrice { get; set; }
 
+        public Boolean IsDiscounted { get; set; }
+
+        public Boolean IsActive { get; set; }
+
+        public Boolean IsDeleted { get; set; }
+
         public String Size { get; set; }
 
-        public Boolean IsDiscounted { get; set; }
+        public string ImagePath { get; set; }
 
         public String Description { get; set; }
     }

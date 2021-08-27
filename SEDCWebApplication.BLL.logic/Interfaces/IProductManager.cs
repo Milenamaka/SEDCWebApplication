@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using SEDCWebApplication.BLL.logic.Models;
 
-namespace SEDCWebApplication.Models.IRepository
+namespace SEDCWebApplication.BLL.logic.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductManager
     {
         IEnumerable<ProductDTO> GetAllProducts();
         ProductDTO GetById(int id);

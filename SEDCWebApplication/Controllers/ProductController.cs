@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.Models;
 using SEDCWebApplication.Models.IRepository;
 using SEDCWebApplication.ViewModels;
@@ -24,10 +25,10 @@ namespace SEDCWebApplication.Controllers
         [Route("ListDTO")]
         public IActionResult ListDTO()
         {
-            List<Product> products = _productRepository.GetAllProducts().ToList();
-            List<ProductDTO> productVM = new List<ProductDTO>();
-            foreach (Product product in products) {
-                ProductDTO productdto = new ProductDTO();
+            List<ProductDTO> products = _productRepository.GetAllProducts().ToList();
+            List<ProductUpdateViewModel> productVM = new List<ProductUpdateViewModel>();
+            foreach (ProductDTO product in products) {
+                ProductUpdateViewModel productdto = new ProductUpdateViewModel();
                 productdto.ImagePath = product.ImagePath;
                 productdto.ProductName = product.ProductName;
                 productdto.Id = product.Id;
@@ -45,8 +46,8 @@ namespace SEDCWebApplication.Controllers
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            Product product = _productRepository.GetById(id);
-            ProductDTO productdto = new ProductDTO();
+            ProductDTO product = _productRepository.GetById(id);
+            ProductUpdateViewModel productdto = new ProductUpdateViewModel();
             productdto.ProductName = product.ProductName;
             productdto.Id = product.Id;
             productdto.UnitPrice = product.UnitPrice;
@@ -62,7 +63,7 @@ namespace SEDCWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductCreateDTO model)
+        public IActionResult Create(ProductCreateViewModel model)
         {
             if (ModelState.IsValid) {
                 string uniqueFileName = "logoPizza.png";
@@ -76,7 +77,7 @@ namespace SEDCWebApplication.Controllers
                 }
 
 
-                Product product = new Product {
+                ProductDTO product = new ProductDTO {
                     ProductName = model.ProductName,
                     Size = model.Size,
                     UnitPrice = model.UnitPrice,
@@ -84,7 +85,7 @@ namespace SEDCWebApplication.Controllers
                     IsDiscounted = model.IsDiscounted,
                     ImagePath = "/img/" + uniqueFileName
                 }; 
-                Product newProduct = _productRepository.Add(product);
+                ProductDTO newProduct = _productRepository.Add(product);
                 return RedirectToAction("Details", new { id = newProduct.Id });
             }
             else {
@@ -96,15 +97,15 @@ namespace SEDCWebApplication.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            Product product = _productRepository.GetById(id);
+            ProductDTO product = _productRepository.GetById(id);
             return View(product);
         }
         [Route("Update/{Product changedProduct}")]
         [HttpPost]
-        public IActionResult Update(Product changedProduct)
+        public IActionResult Update(ProductDTO changedProduct)
         {
             if (ModelState.IsValid) {
-                Product product = _productRepository.GetById(changedProduct.Id);
+                ProductDTO product = _productRepository.GetById(changedProduct.Id);
 
                 product.ProductName = changedProduct.ProductName;
                 product.UnitPrice = changedProduct.UnitPrice;

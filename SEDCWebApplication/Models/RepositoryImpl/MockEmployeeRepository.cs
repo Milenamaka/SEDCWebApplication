@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.Models.IRepository;
 
 namespace SEDCWebApplication.Models.RepositoryImpl
@@ -10,13 +11,13 @@ namespace SEDCWebApplication.Models.RepositoryImpl
     {
 
 
-        private List<Employee> _employeeList;
+        private List<EmployeeDTO> _employeeList;
 
         public MockEmployeeRepository()
         {
-            _employeeList = new List<Employee>
+            _employeeList = new List<EmployeeDTO>
             {
-                new Employee
+                new EmployeeDTO
                 {
                     Id=1,
                     Name="Pera",
@@ -25,7 +26,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                    ImagePath ="/img/pera.jpg",
                     Role = RoleEnum.Manager
         },
-                new Employee
+                new EmployeeDTO
                 {
                     Id=2,
                     Name="Mika",
@@ -34,7 +35,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                     ImagePath ="/img/mika.jpg",
                     Role = RoleEnum.Sales
                 },
-                new Employee
+                new EmployeeDTO
                 {
                     Id=3,
                     Name="Laza",
@@ -46,16 +47,16 @@ namespace SEDCWebApplication.Models.RepositoryImpl
             };
         }
 
-        public List<Employee> GetAllEmplyees()
+        public List<EmployeeDTO> GetAllEmplyees()
         {
             return _employeeList;
         }
 
-        public Employee GetById(int id)
+        public EmployeeDTO GetById(int id)
         {
           return _employeeList.Where(x => x.Id == id).FirstOrDefault();
         }
-        public Employee Add(Employee employee)
+        public EmployeeDTO Add(EmployeeDTO employee)
         {
             employee.Id = _employeeList.Max(e => e.Id) + 1;
             _employeeList.Add(employee);

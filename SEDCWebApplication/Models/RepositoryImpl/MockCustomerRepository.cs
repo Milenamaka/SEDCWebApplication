@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.Models.IRepository;
 
 namespace SEDCWebApplication.Models.RepositoryImpl
 {
     public class MockCustomerRepository : ICustomerRepository
     {
-        private List<Customer> _customerList;
+        private List<CustomerDTO> _customerList;
         public MockCustomerRepository()
         {
-            _customerList = new List<Customer>()
+            _customerList = new List<CustomerDTO>()
             {
-                 new Customer
+                 new CustomerDTO
                 {
                     Id=1,
                     Name="Maja",
@@ -21,7 +22,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                     ContactId= 6,
                     Email ="maja@gmail.com"
                 },
-                new Customer
+                new CustomerDTO
                 {
                     Id=2,
                     Name="Milan",
@@ -29,7 +30,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                     ContactId= 7,
                     Email ="milan@gmail.com"
                 },
-                new Customer
+                new CustomerDTO
                 {
                     Id=3,
                     Name="Luka",
@@ -40,17 +41,17 @@ namespace SEDCWebApplication.Models.RepositoryImpl
             };
            
         }
-        public List<Customer> GetAllCustomers()
+        public List<CustomerDTO> GetAllCustomers()
         {
             return _customerList;
         }
 
-        public Customer GetById(int id)
+        public CustomerDTO GetById(int id)
         {
             return _customerList.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public Customer Add(Customer customer)
+        public CustomerDTO Add(CustomerDTO customer)
         {
             customer.Id = _customerList.Max(e => e.Id) + 1;
             _customerList.Add(customer);

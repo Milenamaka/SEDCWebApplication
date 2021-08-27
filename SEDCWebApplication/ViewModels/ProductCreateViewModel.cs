@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace SEDCWebApplication.ViewModels
 {
-    public class ProductDTO
+    public class ProductCreateViewModel
     {
-        public string ImagePath { get; set; }
+        public IFormFile Photo { get; set; }
         [Required]
         public string ProductName { get; set; }
 
