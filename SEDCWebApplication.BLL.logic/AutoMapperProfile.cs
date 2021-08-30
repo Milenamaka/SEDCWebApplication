@@ -14,6 +14,22 @@ namespace SEDCWebApplication.BLL.Logic
 
             CreateMap<EmployeeDTO, Employee>()
                 .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Email));
+            CreateMap<EmployeeDTO, Employee>()
+               .ForMember(dest => dest.RoleId, src => src.MapFrom(src => src.Role));
+            CreateMap<Employee, EmployeeDTO>()
+              .ForMember(dest => dest.Role, src => src.MapFrom(src => src.RoleId));
+
+ 
+
+            CreateMap<Customer, CustomerDTO>();
+
+            CreateMap<CustomerDTO, Customer>();
+
+            CreateMap<Product, ProductDTO>();
+
+            CreateMap<ProductDTO, Product>();
+
+
 
         }
     }

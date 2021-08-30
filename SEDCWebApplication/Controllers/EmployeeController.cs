@@ -13,9 +13,10 @@ using SEDCWebApplication.ViewModels;
 
 namespace SEDCWebApplication.Controllers
 {
+    [Route("Employee")]
     public class EmployeeController : Controller
     {
-        private IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeRepository _employeeRepository;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
       
@@ -32,13 +33,13 @@ namespace SEDCWebApplication.Controllers
         {
 
             List<EmployeeDTO> employees = _employeeRepository.GetAllEmployees().ToList();
-            List<EmployeeDTO> employeeVM = new List<EmployeeDTO>();
+ 
             ViewBag.Title = "Employees";
 
             return View(employees);
         }
 
-        [Route("Employee/Details/{id}")]
+        [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
             EmployeeDTO employee = _employeeRepository.GetEmployeeById(id);
@@ -51,8 +52,10 @@ namespace SEDCWebApplication.Controllers
 
             EmployeeDetailsViewModel employeeVM = new EmployeeDetailsViewModel();
             employeeVM.EmployeeName = employee.Name;
-            //employeeVM.EmployeeCompany = employee.Company;
+            employeeVM.Id = (Int32)employee.Id;
             employeeVM.PageTitle = "Employee's details";
+            employeeVM.ImagePath = employee.ImagePath;
+
 
             return View(employeeVM);
     
@@ -65,6 +68,7 @@ namespace SEDCWebApplication.Controllers
         }
 
         [HttpPost]
+      
         public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid) {
@@ -77,6 +81,7 @@ namespace SEDCWebApplication.Controllers
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
                 EmployeeDTO employee = new EmployeeDTO {
+                    Id = null,
                     Name = model.Name,
                     Email = model.Email,
                     Role = model.Role,

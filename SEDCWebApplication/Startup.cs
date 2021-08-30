@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SEDCWebApplication.BLL.logic.Implementations;
 using SEDCWebApplication.BLL.logic.Interfaces;
+using SEDCWebApplication.DAL.data.Implementations;
+using SEDCWebApplication.DAL.data.Interfaces;
 using SEDCWebApplication.Models.IRepository;
 using SEDCWebApplication.Models.Repositories.Implementations;
 using SEDCWebApplication.Models.RepositoryImpl;
@@ -30,6 +32,8 @@ namespace SEDCWebApplication
         {
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(EmployeeManager));
+            services.AddAutoMapper(typeof(ProductManager));
+            services.AddAutoMapper(typeof(CustomerManager));
             services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
             services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
             services.AddScoped<IProductRepository, DatabaseProductRepository>();
@@ -37,6 +41,11 @@ namespace SEDCWebApplication
             services.AddScoped<ICustomerManager, CustomerManager>();
             services.AddScoped<IEmployeeManager, EmployeeManager>();
             services.AddScoped<IProductManager, ProductManager>();
+
+
+            services.AddScoped<IEmployeeDAL, EmployeeDAL>();
+            services.AddScoped<ICustomerDAL, CustomerDAL>();
+            services.AddScoped<IProductDAL, ProductDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

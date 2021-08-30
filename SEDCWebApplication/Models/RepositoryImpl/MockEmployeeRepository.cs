@@ -47,12 +47,12 @@ namespace SEDCWebApplication.Models.RepositoryImpl
             };
         }
 
-        public List<EmployeeDTO> GetAllEmplyees()
+        public IEnumerable<EmployeeDTO> GetAllEmployees()
         {
             return _employeeList;
         }
 
-        public EmployeeDTO GetById(int id)
+        public EmployeeDTO GetEmployeeById(int id)
         {
           return _employeeList.Where(x => x.Id == id).FirstOrDefault();
         }

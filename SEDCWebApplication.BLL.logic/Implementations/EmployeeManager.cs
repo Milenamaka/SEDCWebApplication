@@ -24,19 +24,18 @@ namespace SEDCWebApplication.BLL.logic.Implementations
         }
         public EmployeeDTO Add(EmployeeDTO employee)
         {
-            //Employee employeeEntity = new Employee(null)
-            //{
-            //    Name = employee.Name,
-            //    UserName = employee.Email
-            //};
+        
             Employee employeeEntity = _mapper.Map<Employee>(employee);
             _employeeDAL.Save(employeeEntity);
+            employee = _mapper.Map<EmployeeDTO>(employeeEntity);
             return employee;
         }
 
         public IEnumerable<EmployeeDTO> GetAllEmployees()
         {
-            return _mapper.Map<List<EmployeeDTO>>(_employeeDAL.GetAll(0, 5));
+            List<EmployeeDTO> employees = _mapper.Map<List<EmployeeDTO>>(_employeeDAL.GetAll(7, 50));
+      
+            return employees;
         }
 
         public EmployeeDTO GetEmployeeById(int id)

@@ -24,6 +24,7 @@ namespace SEDCWebApplication.BLL.logic.Implementations
 
             Product productEntity = _mapper.Map<Product>(product);
             _productDAL.Save(productEntity);
+            product = _mapper.Map<ProductDTO>(productEntity);
             return product;
         }
 

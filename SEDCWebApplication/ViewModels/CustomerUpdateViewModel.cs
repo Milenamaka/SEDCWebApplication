@@ -1,22 +1,25 @@
 ﻿using System;
+using SEDCWebApplication.Models;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;   
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace SEDCWebApplication.BLL.logic.Models
+namespace SEDCWebApplication.ViewModels
 {
-	public class CustomerDTO
-	{   [Required]
-		public int? Id { get; set; }
+    public class CustomerUpdateViewModel
+    {
+        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
-        [EmailAddress]
+
         public string Address { get; set; }
+
         public int ContactId { get; set; }
 
+        [EmailAddress]
         public string Email { get; set; }
 
         public string ImagePath { get; set; }
-
     }
 }

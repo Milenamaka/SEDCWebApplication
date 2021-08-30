@@ -1,13 +1,17 @@
 ﻿@model CustomerCreateViewModel
 
 <div class="card" style="width: 18rem;">
-    <div class="card-header">
-        <h2>@Model.Name</h2>
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">EMAIL: @Model.Email</li>
-        <li class="list-group-item">ADDRESS: @Model.Address</li>
-        <li class="list-group-item">CONTACT: @Model.ContactId</li>
+    <img class="card-img-top" src="~/img/customer.jpg"alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">EMAIL: @Model.Email</li>
+                <li class="list-group-item">ADDRESS: @Model.Address</li>
+                <li class="list-group-item">CONTACT: @Model.ContactId</li>
 
-    </ul>
+            </ul>
+        </p>
+        <a class="btn btn-primary" asp-controller="customer" asp-action="update" asp-route-id="@Model.Id">Update customer</a>
+    </div>
 </div>

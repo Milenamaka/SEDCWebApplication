@@ -192,7 +192,7 @@ namespace SEDCWebApplication.DAL.data.Implementations
         {
 
             this.ParamStringNonNullableValueSet(cmd, item.ProductName, "@ProductName", SqlDbType.NVarChar, 50);
-            this.ParamStringNonNullableValueSet(cmd, item.Size, "@Size", SqlDbType.NVarChar, 50);
+            this.ParamStringNullableValueSet(cmd, item.Size, "@Size", SqlDbType.NVarChar, 50);
             this.ParamValueTypeNonNullableValueSet(cmd, item.UnitPrice, "@UnitPrice", SqlDbType.Int);
 
         }

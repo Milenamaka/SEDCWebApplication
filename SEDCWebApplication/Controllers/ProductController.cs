@@ -31,7 +31,7 @@ namespace SEDCWebApplication.Controllers
                 ProductUpdateViewModel productdto = new ProductUpdateViewModel();
                 productdto.ImagePath = product.ImagePath;
                 productdto.ProductName = product.ProductName;
-                productdto.Id = product.Id;
+                productdto.Id = (Int32)product.Id;
                 productdto.UnitPrice = product.UnitPrice;
                 productdto.IsDiscounted = product.IsDiscounted;
                 string discount = productdto.IsDiscounted ? "\nDiscounted Now!!!" : " ";
@@ -49,7 +49,7 @@ namespace SEDCWebApplication.Controllers
             ProductDTO product = _productRepository.GetById(id);
             ProductUpdateViewModel productdto = new ProductUpdateViewModel();
             productdto.ProductName = product.ProductName;
-            productdto.Id = product.Id;
+            productdto.Id = (Int32)product.Id;
             productdto.UnitPrice = product.UnitPrice;
             productdto.IsDiscounted = product.IsDiscounted;
             productdto.Size = product.Size;
@@ -102,7 +102,7 @@ namespace SEDCWebApplication.Controllers
         }
         [Route("Update/{Product changedProduct}")]
         [HttpPost]
-        public IActionResult Update(ProductDTO changedProduct)
+        public IActionResult Update(ProductUpdateViewModel changedProduct)
         {
             if (ModelState.IsValid) {
                 ProductDTO product = _productRepository.GetById(changedProduct.Id);

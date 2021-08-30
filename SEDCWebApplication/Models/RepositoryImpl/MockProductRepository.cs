@@ -166,7 +166,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
             };
 
         }
-        List<ProductDTO> IProductRepository.GetAllProducts()
+        IEnumerable<ProductDTO> IProductRepository.GetAllProducts()
         {
             return _productList;
         }

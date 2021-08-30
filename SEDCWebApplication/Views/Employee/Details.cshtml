@@ -1,11 +1,16 @@
 ﻿@model EmployeeDetailsViewModel
 
+
 <div class="card" style="width: 18rem;">
-    <div class="card-header">
-        <h2>@Model.PageTitle</h2>
+    <img class="card-img-top" src="~/img/user.png" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">Employee Details</h5>
+        <p class="card-text">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> NAME: @Model.EmployeeName</li>
+                <li class="list-group-item"> ROLE: @Model.Role</li>
+            </ul>
+        </p>
+        <a class="btn btn-primary" asp-controller="employee" asp-action="update" asp-route-id="@Model.Id">Update employee</a>
     </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"> NAME: @Model.EmployeeName</li>
-     
-    </ul>
 </div>

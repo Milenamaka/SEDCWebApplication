@@ -7,7 +7,7 @@ using SEDCWebApplication.Models.IRepository;
 
 namespace SEDCWebApplication.Models.RepositoryImpl
 {
-    public class MockCustomerRepository : ICustomerRepository
+    public class MockCustomerRepository 
     {
         private List<CustomerDTO> _customerList;
         public MockCustomerRepository()
@@ -41,7 +41,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
             };
            
         }
-        public List<CustomerDTO> GetAllCustomers()
+        public IEnumerable<CustomerDTO> GetAllCustomers()
         {
             return _customerList;
         }

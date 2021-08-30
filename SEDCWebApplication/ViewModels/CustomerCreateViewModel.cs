@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace SEDCWebApplication.ViewModels
 {
@@ -19,5 +20,7 @@ namespace SEDCWebApplication.ViewModels
 
         [EmailAddress]
         public string Email { get; set; }
+
+        public IFormFile Photo { get; set; }
     }
 }

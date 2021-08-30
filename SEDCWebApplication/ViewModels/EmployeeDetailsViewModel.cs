@@ -1,4 +1,5 @@
-﻿using SEDCWebApplication.Models;
+﻿using SEDCWebApplication.BLL.logic.Models;
+using SEDCWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,13 @@ namespace SEDCWebApplication.ViewModels
 {
     public class EmployeeDetailsViewModel
     {
-        //public Employee Employee { get; set; }
+  
 
         public string EmployeeName { get; set; }
         public string PageTitle { get; set; }
 
-        public bool Test { get; set; }
+        public RoleEnum Role { get; set; }
+        public string ImagePath { get; set; }
+        public int Id { get; set; }
     }
 }

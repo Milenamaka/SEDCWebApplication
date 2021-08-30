@@ -127,7 +127,7 @@ namespace SEDCWebApplication.DAL.data.Implementations
             SqlConnection cn = ConnectionGet();
 
             SqlCommand cmd = CommandGet(cn);
-            cmd.CommandText = "Employee_Upd";
+            cmd.CommandText = "Customer_Upd";
 
             CommonParametersAdd(item, cmd);
 
@@ -185,8 +185,11 @@ namespace SEDCWebApplication.DAL.data.Implementations
         {
             this.ParamStringNullableValueSet(cmd, item.UserName, "@UserName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Password, "@Password", SqlDbType.NVarChar, 50);
+            this.ParamStringNullableValueSet(cmd, item.Address, "@Address", SqlDbType.NVarChar, 50);
+            this.ParamStringNullableValueSet(cmd, item.Email, "@Email", SqlDbType.NVarChar, 50);
+            this.ParamStringNullableValueSet(cmd, item.ImagePath, "@ImagePath", SqlDbType.NVarChar, 200);
             this.ParamStringNonNullableValueSet(cmd, item.Name, "@CustomerName", SqlDbType.NVarChar, 50);
-            this.ParamValueTypeNonNullableValueSet(cmd, item.ContactId, "@ContactId", SqlDbType.Int);
+            //this.ParamValueTypeNullableValueSet(cmd, item.ContactId, "@ContactId", SqlDbType.Int);
           
         }
 
@@ -195,9 +198,10 @@ namespace SEDCWebApplication.DAL.data.Implementations
             Customer item = new Customer(ReaderColumnReadNullableValueType<Int32>(reader, "ID", COLUMN_PREFIX));
 
             item.Name = ReaderColumnReadObject<string>(reader, "CustomerName", COLUMN_PREFIX);
-            //item.Email = ReaderColumnReadObject<string>(reader, "Username", COLUMN_PREFIX);
-            //item.Address = ReaderColumnReadObject<string>(reader, "Address", COLUMN_PREFIX);
-            item.ContactId = ReaderColumnReadValueType<int>(reader, "ContactId", COLUMN_PREFIX);
+            item.Email = ReaderColumnReadObject<string>(reader, "Email", COLUMN_PREFIX);
+            item.ImagePath = ReaderColumnReadObject<string>(reader, "ImagePath", COLUMN_PREFIX);
+            item.Address = ReaderColumnReadObject<string>(reader, "Address", COLUMN_PREFIX);
+            //item.ContactId = ReaderColumnReadValueType<int>(reader, "ContactId", COLUMN_PREFIX);
 
             return item;
         }

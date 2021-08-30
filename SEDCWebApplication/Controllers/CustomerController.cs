@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -33,7 +34,7 @@ namespace SEDCWebApplication.Controllers
             List<CustomerCreateViewModel> customersVM = new List<CustomerCreateViewModel>();
             foreach (CustomerDTO customer in customers) {
                 CustomerCreateViewModel customerdto = new CustomerCreateViewModel();
-                customerdto.Id = customer.Id;
+                customerdto.Id = (Int32)customer.Id;
                 customerdto.Name = customer.Name;
                 customerdto.Address = customer.Address;
                 customerdto.Email = customer.Email;
@@ -49,7 +50,7 @@ namespace SEDCWebApplication.Controllers
         {
             CustomerDTO customer = _customerRepository.GetById(id);
             CustomerCreateViewModel customerdto = new CustomerCreateViewModel();
-            customerdto.Id = customer.Id;
+            customerdto.Id = (Int32)customer.Id;
             customerdto.Name = customer.Name;
             customerdto.Address = customer.Address;
             customerdto.Email = customer.Email;
@@ -65,9 +66,26 @@ namespace SEDCWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CustomerDTO customer)
+        public IActionResult Create(CustomerCreateViewModel model)
         {
+
             if (ModelState.IsValid) {
+                string uniqueFileName = "avatar.png";
+                if (model.Photo != null) {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "img");
+
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+                CustomerDTO customer = new CustomerDTO {
+                    Id = null,
+                    Name = model.Name,
+                    Email = model.Email,
+                    ContactId = model.ContactId,
+                    Address = model.Address,
+                    ImagePath = "~/img/" + uniqueFileName
+                };
                 CustomerDTO newCustomer = _customerRepository.Add(customer);
                 return RedirectToAction("Details", new { id = newCustomer.Id });
             }

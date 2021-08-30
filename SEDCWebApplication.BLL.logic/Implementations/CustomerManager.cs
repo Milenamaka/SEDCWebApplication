@@ -23,12 +23,13 @@ namespace SEDCWebApplication.BLL.logic.Implementations
         {
             Customer customerEntity = _mapper.Map<Customer>(customer);
             _customerDAL.Save(customerEntity);
+            customer = _mapper.Map<CustomerDTO>(customerEntity);
             return customer;
         }
 
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
-            return _mapper.Map<List<CustomerDTO>>(_customerDAL.GetAll(0, 5));
+            return _mapper.Map<List<CustomerDTO>>(_customerDAL.GetAll(0, 50));
         }
 
         public CustomerDTO GetCustomerById(int id)

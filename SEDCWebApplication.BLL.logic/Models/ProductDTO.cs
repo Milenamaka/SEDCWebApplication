@@ -11,7 +11,7 @@ namespace SEDCWebApplication.BLL.logic.Models
         [Required]
         public string ProductName { get; set; }
 
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public int UnitPrice { get; set; }
 
