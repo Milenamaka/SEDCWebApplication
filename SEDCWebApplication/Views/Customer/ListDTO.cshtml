@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<CustomerCreateViewModel>
+@model IEnumerable<CustomerUpdateViewModel>
 
 
 <h1>@ViewBag.Title</h1>
@@ -11,7 +11,7 @@
         {
 
         <div class="card card-user">
-            <img class="card-img-top" src="~/img/customer.jpg" alt="Card image" style="width:100%">
+            <img class="card-img-top" src="@customer.ImagePath" alt="Card image" style="width:100%">
             <div class="card-body">
                 <h4 class="card-title">@customer.Name</h4>
                 <a asp-controller="CUSTOMER" asp-action="details" asp-route-id="@customer.Id">See Profile</a>

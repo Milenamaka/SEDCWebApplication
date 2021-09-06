@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SEDCWebApplication.DAL.data.Entities
+namespace SEDCWebApplication.DAL.Data.Entities
 {
     public class User : BaseEntity
     {

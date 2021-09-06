@@ -29,7 +29,7 @@ namespace SEDCWebApplication.BLL.logic.Implementations
 
         public IEnumerable<CustomerDTO> GetAllCustomers()
         {
-            return _mapper.Map<List<CustomerDTO>>(_customerDAL.GetAll(0, 50));
+            return _mapper.Map<List<CustomerDTO>>(_customerDAL.GetAll(0, 90));
         }
 
         public CustomerDTO GetCustomerById(int id)

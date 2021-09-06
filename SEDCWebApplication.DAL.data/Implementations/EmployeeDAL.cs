@@ -1,13 +1,12 @@
-﻿using SEDCWebApplication.DAL.data;
-using SEDCWebApplication.DAL.data.Entities;
-using SEDCWebApplication.DAL.data.Interfaces;
+﻿using SEDCWebApplication.DAL.Data.Entities;
+using SEDCWebApplication.DAL.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace SEDCWebApplication.DAL.data.Implementations
+namespace SEDCWebApplication.DAL.Data.Implementations
 {
     public class EmployeeDAL : BaseDAL, IEmployeeDAL
     {
@@ -59,8 +58,7 @@ namespace SEDCWebApplication.DAL.data.Implementations
             }
             catch (Exception ex)
             {
-                //DMLogger.Singleton.LogError(LogCategories.SECURITY, ex);
-                throw;
+                throw ex;
             }
             finally
             {
@@ -211,13 +209,10 @@ namespace SEDCWebApplication.DAL.data.Implementations
 
         private void CommonParametersAdd(Employee item, SqlCommand cmd)
         {
-      
-
             this.ParamStringNullableValueSet(cmd, item.UserName, "@UserName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Password, "@Password", SqlDbType.NVarChar, 50);
             this.ParamStringNonNullableValueSet(cmd, item.Name, "@EmployeeName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Gender, "@Gender", SqlDbType.NVarChar, 50);
-            this.ParamStringNullableValueSet(cmd, item.ImagePath, "@ImagePath", SqlDbType.NVarChar, 200);
             this.ParamValueTypeNonNullableValueSet(cmd, item.RoleId, "@RoleId", SqlDbType.Int);
             this.ParamValueTypeNonNullableValueSet(cmd, item.DateOfBirth, "@DateOfBirth", SqlDbType.Date);
         }
@@ -230,7 +225,6 @@ namespace SEDCWebApplication.DAL.data.Implementations
             item.Gender = ReaderColumnReadObject<string>(reader, "Gender", COLUMN_PREFIX);
             item.RoleId = ReaderColumnReadValueType<int>(reader, "RoleId", COLUMN_PREFIX);
             item.DateOfBirth = ReaderColumnReadValueType<DateTime>(reader, "DateOfBirth", COLUMN_PREFIX);
-            item.ImagePath = ReaderColumnReadObject<string>(reader, "ImagePath", COLUMN_PREFIX);
 
             return item;
         }

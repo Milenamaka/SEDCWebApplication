@@ -1,15 +1,13 @@
-﻿@model CustomerCreateViewModel
+﻿@model CustomerUpdateViewModel
 
 <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="~/img/customer.jpg"alt="Card image cap">
+    <img class="card-img-top" src="@Model.ImagePath"alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">EMAIL: @Model.Email</li>
-                <li class="list-group-item">ADDRESS: @Model.Address</li>
-                <li class="list-group-item">CONTACT: @Model.ContactId</li>
-
+                <li class="list-group-item">nista: @Model.Address</li>
             </ul>
         </p>
         <a class="btn btn-primary" asp-controller="customer" asp-action="update" asp-route-id="@Model.Id">Update customer</a>

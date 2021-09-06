@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using SEDCWebApplication.BLL.logic.Implementations;
-using SEDCWebApplication.BLL.logic.Interfaces;
-using SEDCWebApplication.DAL.data.Implementations;
-using SEDCWebApplication.DAL.data.Interfaces;
-using SEDCWebApplication.Models.IRepository;
+using Microsoft.Extensions.Logging;
+using SEDCWebApplication.BLL.Logic.Implementations;
+using SEDCWebApplication.BLL.Logic.Interfaces;
+using SEDCWebApplication.DAL.Data.Implementations;
+using SEDCWebApplication.DAL.Data.Interfaces;
 using SEDCWebApplication.Models.Repositories.Implementations;
-using SEDCWebApplication.Models.RepositoryImpl;
+using SEDCWebApplication.Models.Repositories.Interfaces;
 
 namespace SEDCWebApplication
 {
@@ -31,29 +32,29 @@ namespace SEDCWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddAutoMapper(typeof(EmployeeManager));
-            services.AddAutoMapper(typeof(ProductManager));
-            services.AddAutoMapper(typeof(CustomerManager));
-            services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
+
             services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
-            services.AddScoped<IProductRepository, DatabaseProductRepository>();
 
-            services.AddScoped<ICustomerManager, CustomerManager>();
+
+            //BLL
             services.AddScoped<IEmployeeManager, EmployeeManager>();
-            services.AddScoped<IProductManager, ProductManager>();
 
-
+            //DAL
             services.AddScoped<IEmployeeDAL, EmployeeDAL>();
-            services.AddScoped<ICustomerDAL, CustomerDAL>();
-            services.AddScoped<IProductDAL, ProductDAL>();
+            services.AddScoped<IOrderDAL, OrderDAL>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithRedirects("/ErrorStatus/{0}");
+                //app.UseExceptionHandler("/Error");
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -61,11 +62,26 @@ namespace SEDCWebApplication
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello from Middleware!");
+            //});
+
+            app.Use(async (context, next) =>
+            {
+                logger.LogInformation("Middelware 1 Request In");
+                //await context.Response.WriteAsync("Hello from Middleware!");
+                await next();
+
+                logger.LogInformation("Middelware 1 Response Out");
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
 
+            app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -19,7 +19,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                     Id=1,
                     Name="Maja",
                     Address="Njegoseva 55",
-                    ContactId= 6,
+                    //ContactId= 6,
                     Email ="maja@gmail.com"
                 },
                 new CustomerDTO
@@ -27,7 +27,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                     Id=2,
                     Name="Milan",
                     Address="Mokranjceva 26",
-                    ContactId= 7,
+                    //ContactId= 7,
                     Email ="milan@gmail.com"
                 },
                 new CustomerDTO
@@ -35,7 +35,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                     Id=3,
                     Name="Luka",
                     Address="Kotorska 11",
-                    ContactId= 5,
+                    //ContactId= 5,
                     Email ="luka@gmail.com"
                 }
             };

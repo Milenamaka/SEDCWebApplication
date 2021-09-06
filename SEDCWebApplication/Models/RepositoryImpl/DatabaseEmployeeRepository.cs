@@ -22,7 +22,13 @@ namespace SEDCWebApplication.Models.Repositories.Implementations
 
         public EmployeeDTO GetEmployeeById(int id)
         {
-            return _employeeManager.GetEmployeeById(id);
+            try {
+                return _employeeManager.GetEmployeeById(id);
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+
         }
 
         public EmployeeDTO Add(EmployeeDTO employee)

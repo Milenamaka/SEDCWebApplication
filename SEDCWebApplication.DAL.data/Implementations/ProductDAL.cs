@@ -193,6 +193,9 @@ namespace SEDCWebApplication.DAL.data.Implementations
 
             this.ParamStringNonNullableValueSet(cmd, item.ProductName, "@ProductName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Size, "@Size", SqlDbType.NVarChar, 50);
+            this.ParamStringNullableValueSet(cmd, item.ImagePath, "@ImagePath", SqlDbType.NVarChar, 255);
+            this.ParamStringNullableValueSet(cmd, item.Description, "@Description", SqlDbType.NVarChar, 255);
+            this.ParamValueTypeNonNullableValueSet(cmd, item.IsDiscounted, "@IsDiscounted", SqlDbType.Bit);
             this.ParamValueTypeNonNullableValueSet(cmd, item.UnitPrice, "@UnitPrice", SqlDbType.Int);
 
         }
@@ -203,6 +206,9 @@ namespace SEDCWebApplication.DAL.data.Implementations
 
             item.ProductName = ReaderColumnReadObject<string>(reader, "ProductName", COLUMN_PREFIX);
             item.Size = ReaderColumnReadObject<string>(reader, "Size", COLUMN_PREFIX);
+            item.ImagePath = ReaderColumnReadObject<string>(reader, "ImagePath", COLUMN_PREFIX);
+            item.Description = ReaderColumnReadObject<string>(reader, "Description", COLUMN_PREFIX);
+            item.IsDiscounted = ReaderColumnReadValueType<Boolean>(reader, "IsDiscounted", COLUMN_PREFIX);
             item.UnitPrice = ReaderColumnReadValueType<int>(reader, "UnitPrice", COLUMN_PREFIX);
 
 

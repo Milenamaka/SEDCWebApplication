@@ -25,37 +25,42 @@ namespace SEDCWebApplication.Controllers
         [Route("ListDTO")]
         public IActionResult ListDTO()
         {
-            List<ProductDTO> products = _productRepository.GetAllProducts().ToList();
-            List<ProductUpdateViewModel> productVM = new List<ProductUpdateViewModel>();
-            foreach (ProductDTO product in products) {
-                ProductUpdateViewModel productdto = new ProductUpdateViewModel();
-                productdto.ImagePath = product.ImagePath;
-                productdto.ProductName = product.ProductName;
-                productdto.Id = (Int32)product.Id;
-                productdto.UnitPrice = product.UnitPrice;
-                productdto.IsDiscounted = product.IsDiscounted;
-                string discount = productdto.IsDiscounted ? "\nDiscounted Now!!!" : " ";
-                productdto.Size = product.Size;
-                productdto.Description = product.Description;
-                productVM.Add(productdto);
+            List<ProductDTO> productsDTO = _productRepository.GetAllProducts().ToList();
+            List<ProductUpdateViewModel> productsVM = new List<ProductUpdateViewModel>();
+            foreach (ProductDTO productDTO in productsDTO) {
+                ProductUpdateViewModel productvm = new ProductUpdateViewModel();
+                productvm.ImagePath = productDTO.ImagePath;
+                productvm.ProductName = productDTO.ProductName;
+                productvm.Id = (Int32)productDTO.Id;
+                productvm.UnitPrice = productDTO.UnitPrice;
+                productvm.IsDiscounted = productDTO.IsDiscounted;
+                string discount = productvm.IsDiscounted ? "\nDiscounted Now!!!" : "Regular Price";
+                productvm.Size = productDTO.Size;
+                productvm.Description = productDTO.Description;
+                productsVM.Add(productvm);
 
             }
-            return View(productVM);
+            return View(productsVM);
         }
 
+        [HttpGet]
         [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
-            ProductDTO product = _productRepository.GetById(id);
-            ProductUpdateViewModel productdto = new ProductUpdateViewModel();
-            productdto.ProductName = product.ProductName;
-            productdto.Id = (Int32)product.Id;
-            productdto.UnitPrice = product.UnitPrice;
-            productdto.IsDiscounted = product.IsDiscounted;
-            productdto.Size = product.Size;
-            return View(productdto);
+            ProductDTO productdto = _productRepository.GetById(id);
+            ProductUpdateViewModel productvm = new ProductUpdateViewModel();
+            productvm.ProductName = productdto.ProductName;
+            productvm.Id = (Int32)productdto.Id;
+            productvm.UnitPrice = productdto.UnitPrice;
+            productvm.IsDiscounted = productdto.IsDiscounted;
+            productvm.Size = productdto.Size;
+            productvm.ImagePath = productdto.ImagePath;
+            productvm.Description= productdto.Description;
+            return View(productvm);
 
         }
+
+
         [HttpGet]
         public IActionResult Create()
         {

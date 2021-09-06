@@ -13,7 +13,7 @@ namespace SEDCWebApplication.DAL.data.Entities
         public string Name { get; set; }
      
         public string Address { get; set; }
-        public int ContactId { get; set; }
+       // public int ContactId { get; set; }
         public string ImagePath { get; set; }
         public string Email { get; set; }
     }

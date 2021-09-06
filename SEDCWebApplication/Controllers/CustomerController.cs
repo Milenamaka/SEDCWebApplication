@@ -31,14 +31,15 @@ namespace SEDCWebApplication.Controllers
         {
             List<CustomerDTO> customers = _customerRepository.GetAllCustomers().ToList();
 
-            List<CustomerCreateViewModel> customersVM = new List<CustomerCreateViewModel>();
+            List<CustomerUpdateViewModel> customersVM = new List<CustomerUpdateViewModel>();
             foreach (CustomerDTO customer in customers) {
-                CustomerCreateViewModel customerdto = new CustomerCreateViewModel();
+                CustomerUpdateViewModel customerdto = new CustomerUpdateViewModel();
                 customerdto.Id = (Int32)customer.Id;
                 customerdto.Name = customer.Name;
                 customerdto.Address = customer.Address;
                 customerdto.Email = customer.Email;
-                customerdto.ContactId = customer.ContactId;
+                customerdto.ImagePath = customer.ImagePath;
+               // customerdto.ContactId = customer.ContactId;
                 customersVM.Add(customerdto);
                 
             }
@@ -49,12 +50,13 @@ namespace SEDCWebApplication.Controllers
         public IActionResult Details(int id)
         {
             CustomerDTO customer = _customerRepository.GetById(id);
-            CustomerCreateViewModel customerdto = new CustomerCreateViewModel();
+            CustomerUpdateViewModel customerdto = new CustomerUpdateViewModel();
             customerdto.Id = (Int32)customer.Id;
             customerdto.Name = customer.Name;
             customerdto.Address = customer.Address;
             customerdto.Email = customer.Email;
-            customerdto.ContactId = customer.ContactId;
+            //customerdto.ContactId = customer.ContactId;
+            customerdto.ImagePath = customer.ImagePath;
             return View(customerdto);
 
         }
@@ -82,9 +84,9 @@ namespace SEDCWebApplication.Controllers
                     Id = null,
                     Name = model.Name,
                     Email = model.Email,
-                    ContactId = model.ContactId,
+                   // ContactId = model.ContactId,
                     Address = model.Address,
-                    ImagePath = "~/img/" + uniqueFileName
+                    ImagePath = "/img/" + uniqueFileName
                 };
                 CustomerDTO newCustomer = _customerRepository.Add(customer);
                 return RedirectToAction("Details", new { id = newCustomer.Id });

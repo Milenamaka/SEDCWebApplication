@@ -1,26 +1,27 @@
-﻿using System;
+﻿using SEDCWebApplication.DAL.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEDCWebApplication.BLL.logic.Models
+namespace SEDCWebApplication.BLL.Logic.Models
 {
     public class EmployeeDTO
     {
         public int? Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Ime je obavezno")]
         public string Name { get; set; }
-        public string Company { get; set; }
-        [EmailAddress]
+
         public string Email { get; set; }
+        public RoleEnum Role { get; set; }
+
+        public List<Order> Orders { get; set; }
 
         public string ImagePath { get; set; }
 
-        public RoleEnum Role { get; set; }
-
-
-
+        public bool Test { get; set; }
 
     }
 }

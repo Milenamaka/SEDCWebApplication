@@ -1,19 +1,18 @@
-﻿@model ProductUpdateViewModel
-
-
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="~/img/margarita.jpg" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">@Model.ProductName</h5>
-        <p class="card-text">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">PRICE: @Model.UnitPrice</li>
-                <li class="list-group-item">SIZE: @Model.Size</li>
-                @{String discount = Model.IsDiscounted ? "Discounted Now!!!" : " ";}
-                <li class="list-group-item alert-danger">@discount</li>
-
-            </ul>
-        </p>
-        <a class="btn btn-primary" asp-controller="product" asp-action="update" asp-route-id="@Model.Id">Update product</a>
+﻿@model ProductUpdateViewModel  
+@{String discount = Model.IsDiscounted ? "Discounted Now!!!" : "Regular Price";}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@Model.ImagePath" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@Model.ProductName</h5>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"> SIZE: @Model.Size</li>
+            <li class="list-group-item">PRICE: @Model.UnitPrice</li>
+        <li class="list-group-item">discount</li>
+        </ul>
+        <div class="card-body">
+            <a class="btn btn-primary"  asp-controller="product" asp-action="update" asp-route-id="@Model.Id">See Details</a>
+        </div>
     </div>
-</div>
+

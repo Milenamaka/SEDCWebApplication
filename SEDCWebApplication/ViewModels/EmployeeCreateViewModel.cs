@@ -1,24 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using SEDCWebApplication.BLL.Logic.Models;
+using SEDCWebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using SEDCWebApplication.BLL.logic.Models;
-using SEDCWebApplication.Models;
 
 namespace SEDCWebApplication.ViewModels
 {
     public class EmployeeCreateViewModel
     {
-        public IFormFile Photo { get; set; }
-        public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Ime je obavezno")]
         public string Name { get; set; }
 
-        [EmailAddress]
         public string Email { get; set; }
-
         public RoleEnum Role { get; set; }
+
+        public IFormFile Photo { get; set; }
     }
 }

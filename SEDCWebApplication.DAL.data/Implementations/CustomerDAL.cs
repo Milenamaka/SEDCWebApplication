@@ -201,7 +201,7 @@ namespace SEDCWebApplication.DAL.data.Implementations
             item.Email = ReaderColumnReadObject<string>(reader, "Email", COLUMN_PREFIX);
             item.ImagePath = ReaderColumnReadObject<string>(reader, "ImagePath", COLUMN_PREFIX);
             item.Address = ReaderColumnReadObject<string>(reader, "Address", COLUMN_PREFIX);
-            //item.ContactId = ReaderColumnReadValueType<int>(reader, "ContactId", COLUMN_PREFIX);
+      
 
             return item;
         }

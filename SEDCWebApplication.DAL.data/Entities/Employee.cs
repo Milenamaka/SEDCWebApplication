@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SEDCWebApplication.DAL.data.Entities
+namespace SEDCWebApplication.DAL.Data.Entities
 {
     public class Employee : User
     {
@@ -17,6 +17,5 @@ namespace SEDCWebApplication.DAL.data.Entities
         public int RoleId { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-        public string ImagePath { get; set; }
     }
 }

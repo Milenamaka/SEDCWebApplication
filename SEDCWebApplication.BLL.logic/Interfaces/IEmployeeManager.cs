@@ -1,9 +1,9 @@
-﻿using SEDCWebApplication.BLL.logic.Models;
+﻿using SEDCWebApplication.BLL.Logic.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SEDCWebApplication.BLL.logic.Interfaces
+namespace SEDCWebApplication.BLL.Logic.Interfaces
 {
     public interface IEmployeeManager
     {

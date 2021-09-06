@@ -16,7 +16,7 @@ namespace SEDCWebApplication.ViewModels
 
         public string Address { get; set; }
 
-        public int ContactId { get; set; }
+      //  public int ContactId { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }

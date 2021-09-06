@@ -30,7 +30,7 @@ namespace SEDCWebApplication.BLL.logic.Implementations
 
         public IEnumerable<ProductDTO> GetAllProducts()
         {
-            return _mapper.Map<List<ProductDTO>>(_productDAL.GetAllProducts(0, 5));
+            return _mapper.Map<List<ProductDTO>>(_productDAL.GetAllProducts(0, 50));
         }
 
         public ProductDTO GetById(int id)

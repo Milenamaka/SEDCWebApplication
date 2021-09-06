@@ -1,16 +1,11 @@
 ﻿@model EmployeeDetailsViewModel
 
+<h1>@Model.PageTitle</h1>
+<h2>@Model.EmployeeName</h2>
+@if(Model.Test) { <p> Test </p> } else { <p></p> };
 
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="~/img/user.png" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">Employee Details</h5>
-        <p class="card-text">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"> NAME: @Model.EmployeeName</li>
-                <li class="list-group-item"> ROLE: @Model.Role</li>
-            </ul>
-        </p>
-        <a class="btn btn-primary" asp-controller="employee" asp-action="update" asp-route-id="@Model.Id">Update employee</a>
-    </div>
-</div>
+
+
+
+
+

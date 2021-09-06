@@ -12,7 +12,7 @@ namespace SEDCWebApplication.BLL.logic.Models
         public string Name { get; set; }
         [EmailAddress]
         public string Address { get; set; }
-        public int ContactId { get; set; }
+        //public int ContactId { get; set; }
 
         public string Email { get; set; }
 
