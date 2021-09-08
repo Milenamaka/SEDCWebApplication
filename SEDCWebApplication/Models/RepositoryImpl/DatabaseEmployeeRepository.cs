@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEDCWebApplication.Models.Repositories.Implementations
+namespace SEDCWebApplication.Models.RepositoryImpl
 {
     public class DatabaseEmployeeRepository : IEmployeeRepository
     {

@@ -7,10 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SEDCWebApplication.BLL.Logic.Models;
+using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.Models;
-using SEDCWebApplication.Models.Repositories.Implementations;
-using SEDCWebApplication.Models.Repositories.Interfaces;
+using SEDCWebApplication.Models.IRepository;
 using SEDCWebApplication.ViewModels;
 
 namespace SEDCWebApplication.Controllers
@@ -39,31 +38,34 @@ namespace SEDCWebApplication.Controllers
         {
 
             List<EmployeeDTO> employees = _employeeRepository.GetAllEmployees().ToList();
-            ViewBag.Title = "Employees";
 
-            return View(employees);
+            List<EmployeeUpdateViewModel> employeesVM = new List<EmployeeUpdateViewModel>();
+            foreach (EmployeeDTO employeeDTO in employees) {
+                EmployeeUpdateViewModel employeeVM = new EmployeeUpdateViewModel();
+                employeeVM.Id = (Int32)employeeDTO.Id;
+                employeeVM.Name = employeeDTO.Name;
+                employeeVM.Email = employeeDTO.Email;
+                employeeVM.ImagePath = employeeDTO.ImagePath;
+                employeeVM.ControllerName = "employee";
+                employeesVM.Add(employeeVM);
+
+            }
+            return View(employeesVM);
         }
 
-        [Route("DetailsView/{id}")]
+        [Route("Details/{id}")]
         public IActionResult Details(int id)
         {
 
-                //MockEmployeeRepository mockEmployeeRepository = new MockEmployeeRepository();
-                //Employee employee =  mockEmployeeRepository.GetEmployeeById(id);
-                //Employee employee = employees.Where(x => x.Id == id).FirstOrDefault();
+                
 
                 EmployeeDTO employee = _employeeRepository.GetEmployeeById(id);
 
-                //EmployeeDetailsViewModel employeeVM = new EmployeeDetailsViewModel
-                //{
-                //    Employee = employee,
-                //    PageTitle = "Employee's details"
-                //};
 
                 EmployeeDetailsViewModel employeeVM = new EmployeeDetailsViewModel();
-                employeeVM.EmployeeName = employee.Name;
-                employeeVM.Test = employee.Test;
-                //employeeVM.EmployeeCompany = employee.Company;
+                employeeVM.Name = employee.Name;
+                employeeVM.Role = employee.Role;
+                employeeVM.ImagePath = employee.ImagePath;
                 employeeVM.PageTitle = "Employee's details";
 
                 return View(employeeVM);

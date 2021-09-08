@@ -18,5 +18,7 @@ namespace SEDCWebApplication.ViewModels
         public RoleEnum Role { get; set; }
 
         public string ImagePath { get; set; }
+
+        public string ControllerName { get; set; }
     }
 }

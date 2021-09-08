@@ -27,6 +27,14 @@ namespace SEDCWebApplication.BLL.logic.Implementations
             product = _mapper.Map<ProductDTO>(productEntity);
             return product;
         }
+        public ProductDTO Delete(ProductDTO product)
+        {
+
+            Product productEntity = _mapper.Map<Product>(product);
+            _productDAL.Delete(productEntity);
+            product = _mapper.Map<ProductDTO>(productEntity);
+            return product;
+        }
 
         public IEnumerable<ProductDTO> GetAllProducts()
         {

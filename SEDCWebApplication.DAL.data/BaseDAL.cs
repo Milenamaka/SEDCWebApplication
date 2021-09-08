@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
-using SEDCWebApplication.DAL.Data.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
+using Microsoft.Extensions.Configuration;
+using SEDCWebApplication.DAL.data.Entities;
 
-namespace SEDCWebApplication.DAL.Data
+namespace SEDCWebApplication.DAL.data
 {
     public abstract class BaseDAL
     {
@@ -18,12 +18,10 @@ namespace SEDCWebApplication.DAL.Data
         protected SqlConnection ConnectionGet()
         {
             SqlConnection cn = new SqlConnection();
-            try
-            {
+            try {
                 cn.ConnectionString = ReadConnectionString();
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 string msg = String.Format(
                     "ConnectionPSGet failed. Check {0} in config file.",
                     DB_CONNECTION_STRING_KEY);
@@ -60,12 +58,10 @@ namespace SEDCWebApplication.DAL.Data
             string prefix,
             string columnName)
         {
-            if (!String.IsNullOrEmpty(prefix))
-            {
+            if (!String.IsNullOrEmpty(prefix)) {
                 return prefix + "_" + columnName;
             }
-            else
-            {
+            else {
                 return columnName;
             }
         }
@@ -75,8 +71,7 @@ namespace SEDCWebApplication.DAL.Data
             string columnName,
             string columnPrefix = null) where T : class
         {
-            if (reader[ColumnNameWithPrefixGet(columnPrefix, columnName)] == DBNull.Value)
-            {
+            if (reader[ColumnNameWithPrefixGet(columnPrefix, columnName)] == DBNull.Value) {
                 return null;
             }
 
@@ -90,8 +85,7 @@ namespace SEDCWebApplication.DAL.Data
             string columnName,
             string columnPrefix = null) where T : struct
         {
-            if (reader[ColumnNameWithPrefixGet(columnPrefix, columnName)] == DBNull.Value)
-            {
+            if (reader[ColumnNameWithPrefixGet(columnPrefix, columnName)] == DBNull.Value) {
                 throw new Exception(String.Format("columnName {0} is null", columnName));
             }
 
@@ -106,8 +100,7 @@ namespace SEDCWebApplication.DAL.Data
             string columnName,
             string columnPrefix = null) where T : struct
         {
-            if (reader[ColumnNameWithPrefixGet(columnPrefix, columnName)] == DBNull.Value)
-            {
+            if (reader[ColumnNameWithPrefixGet(columnPrefix, columnName)] == DBNull.Value) {
                 return null;
             }
 
@@ -138,8 +131,7 @@ namespace SEDCWebApplication.DAL.Data
                 columnName,
                 columnPrefix);
 
-            if (columnValue == null)
-            {
+            if (columnValue == null) {
                 return null;
             }
 
@@ -161,8 +153,7 @@ namespace SEDCWebApplication.DAL.Data
                 columnName,
                 columnPrefix);
 
-            if (fkId == null)
-            {
+            if (fkId == null) {
                 return null;
             }
 
@@ -177,20 +168,17 @@ namespace SEDCWebApplication.DAL.Data
             T complexObject)
             where T : BaseEntity
         {
-            if (complexObject == null)
-            {
+            if (complexObject == null) {
                 prm.Value = DBNull.Value;
                 cmd.Parameters.Add(prm);
                 return;
             }
 
-            if (complexObject.Id.HasValue)
-            {
+            if (complexObject.Id.HasValue) {
                 prm.Value = complexObject.Id.Value;
                 cmd.Parameters.Add(prm);
             }
-            else
-            {
+            else {
                 throw new ArgumentNullException(
                     String.Format(
                         "Null value of property of complex object {0} is unexpected",
@@ -204,8 +192,7 @@ namespace SEDCWebApplication.DAL.Data
             T complexObject)
             where T : BaseEntity
         {
-            if (complexObject == null)
-            {
+            if (complexObject == null) {
                 throw new ArgumentNullException(
                     String.Format(
                         "Null value of property of type {0} is unexpected. paramName: {1}",
@@ -213,13 +200,11 @@ namespace SEDCWebApplication.DAL.Data
                         prm.ParameterName));
             }
 
-            if (complexObject.Id.HasValue)
-            {
+            if (complexObject.Id.HasValue) {
                 prm.Value = complexObject.Id.Value;
                 cmd.Parameters.Add(prm);
             }
-            else
-            {
+            else {
                 throw new ArgumentNullException(
                     String.Format(
                         "Null value of property of complex object {0} is unexpected. paramName: {1}",
@@ -233,12 +218,10 @@ namespace SEDCWebApplication.DAL.Data
             SqlParameter prm,
             string propertyValue)
         {
-            if (string.IsNullOrEmpty(propertyValue))
-            {
+            if (string.IsNullOrEmpty(propertyValue)) {
                 prm.Value = DBNull.Value;
             }
-            else
-            {
+            else {
                 prm.Value = propertyValue;
             }
             cmd.Parameters.Add(prm);
@@ -249,15 +232,13 @@ namespace SEDCWebApplication.DAL.Data
             SqlParameter prm,
             string propertyValue)
         {
-            if (string.IsNullOrEmpty(propertyValue))
-            {
+            if (string.IsNullOrEmpty(propertyValue)) {
                 throw new ArgumentNullException(
                         prm.ParameterName,
                         String.Format(
                             "Null or Empty value string is unexpected"));
             }
-            else
-            {
+            else {
                 prm.Value = propertyValue;
                 cmd.Parameters.Add(prm);
             }
@@ -277,12 +258,10 @@ namespace SEDCWebApplication.DAL.Data
             SqlParameter prm,
             Nullable<T> paramValue) where T : struct
         {
-            if (paramValue.HasValue)
-            {
+            if (paramValue.HasValue) {
                 prm.Value = paramValue;
             }
-            else
-            {
+            else {
                 prm.Value = DBNull.Value;
             }
             cmd.Parameters.Add(prm);
@@ -298,20 +277,17 @@ namespace SEDCWebApplication.DAL.Data
            where T : BaseEntity
         {
             SqlParameter prm = new SqlParameter(paramName, paramType);
-            if (complexObject == null)
-            {
+            if (complexObject == null) {
                 prm.Value = DBNull.Value;
                 cmd.Parameters.Add(prm);
                 return;
             }
 
-            if (complexObject.Id.HasValue)
-            {
+            if (complexObject.Id.HasValue) {
                 prm.Value = complexObject.Id.Value;
                 cmd.Parameters.Add(prm);
             }
-            else
-            {
+            else {
                 throw new ArgumentNullException(
                     prm.ParameterName,
                     String.Format(
@@ -329,20 +305,17 @@ namespace SEDCWebApplication.DAL.Data
            where T : BaseEntity
         {
             SqlParameter prm = new SqlParameter(paramName, paramType, paramSize);
-            if (complexObject == null)
-            {
+            if (complexObject == null) {
                 prm.Value = DBNull.Value;
                 cmd.Parameters.Add(prm);
                 return;
             }
 
-            if (complexObject.Id.HasValue)
-            {
+            if (complexObject.Id.HasValue) {
                 prm.Value = complexObject.Id.Value;
                 cmd.Parameters.Add(prm);
             }
-            else
-            {
+            else {
                 throw new ArgumentNullException(
                     prm.ParameterName,
                     String.Format(
@@ -387,14 +360,11 @@ namespace SEDCWebApplication.DAL.Data
             SqlDbType paramType)
         {
             SqlParameter prm = new SqlParameter(paramName, paramType);
-            if (string.IsNullOrWhiteSpace(propertyValue))
-            {
+            if (string.IsNullOrWhiteSpace(propertyValue)) {
                 prm.Value = DBNull.Value;
             }
-            else
-            {
-                if (propertyValue.Length > prm.Size)
-                {
+            else {
+                if (propertyValue.Length > prm.Size) {
                     throw new Exception(String.Format("Parameter: '{0}' size is '{1}' but property length is '{2}'", paramName, prm.Size, propertyValue.Length));
                 }
 
@@ -411,14 +381,11 @@ namespace SEDCWebApplication.DAL.Data
             int paramSize)
         {
             SqlParameter prm = new SqlParameter(paramName, paramType, paramSize);
-            if (string.IsNullOrWhiteSpace(propertyValue))
-            {
+            if (string.IsNullOrWhiteSpace(propertyValue)) {
                 prm.Value = DBNull.Value;
             }
-            else
-            {
-                if (propertyValue.Length > prm.Size)
-                {
+            else {
+                if (propertyValue.Length > prm.Size) {
                     throw new Exception(String.Format("Parameter: '{0}' size is '{1}' but property length is '{2}'", paramName, prm.Size, propertyValue.Length));
                 }
 
@@ -434,15 +401,13 @@ namespace SEDCWebApplication.DAL.Data
             SqlDbType paramType)
         {
             SqlParameter prm = new SqlParameter(paramName, paramType);
-            if (string.IsNullOrWhiteSpace(propertyValue))
-            {
+            if (string.IsNullOrWhiteSpace(propertyValue)) {
                 throw new ArgumentNullException(
                         prm.ParameterName,
                         String.Format(
                             "Null or Empty value string is unexpected"));
             }
-            else
-            {
+            else {
                 prm.Value = propertyValue;
                 cmd.Parameters.Add(prm);
             }
@@ -456,15 +421,13 @@ namespace SEDCWebApplication.DAL.Data
             int paramSize)
         {
             SqlParameter prm = new SqlParameter(paramName, paramType, paramSize);
-            if (string.IsNullOrWhiteSpace(propertyValue))
-            {
+            if (string.IsNullOrWhiteSpace(propertyValue)) {
                 throw new ArgumentNullException(
                         prm.ParameterName,
                         String.Format(
                             "Null or Empty value string is unexpected"));
             }
-            else
-            {
+            else {
                 prm.Value = propertyValue;
                 cmd.Parameters.Add(prm);
             }
@@ -479,7 +442,7 @@ namespace SEDCWebApplication.DAL.Data
             SqlParameter prm = new SqlParameter(paramName, paramType);
             prm.Value = paramValue;
             cmd.Parameters.Add(prm);
-        }
+       }
 
         protected void ParamValueTypeNonNullableValueSet<T>(
             SqlCommand cmd,
@@ -500,12 +463,10 @@ namespace SEDCWebApplication.DAL.Data
             SqlDbType paramType) where T : struct
         {
             SqlParameter prm = new SqlParameter(paramName, paramType);
-            if (paramValue.HasValue)
-            {
+            if (paramValue.HasValue) {
                 prm.Value = paramValue;
             }
-            else
-            {
+            else {
                 prm.Value = DBNull.Value;
             }
             cmd.Parameters.Add(prm);
@@ -519,12 +480,10 @@ namespace SEDCWebApplication.DAL.Data
             int paramSize) where T : struct
         {
             SqlParameter prm = new SqlParameter(paramName, paramType, paramSize);
-            if (paramValue.HasValue)
-            {
+            if (paramValue.HasValue) {
                 prm.Value = paramValue;
             }
-            else
-            {
+            else {
                 prm.Value = DBNull.Value;
             }
             cmd.Parameters.Add(prm);
@@ -537,12 +496,10 @@ namespace SEDCWebApplication.DAL.Data
             SqlDbType paramType) where T : struct
         {
             SqlParameter prm = new SqlParameter(paramName, paramType);
-            if (paramValue != null)
-            {
+            if (paramValue != null) {
                 prm.Value = paramValue;
             }
-            else
-            {
+            else {
                 prm.Value = DBNull.Value;
             }
             cmd.Parameters.Add(prm);
@@ -556,12 +513,10 @@ namespace SEDCWebApplication.DAL.Data
             int paramSize) where T : struct
         {
             SqlParameter prm = new SqlParameter(paramName, paramType, paramSize);
-            if (paramValue != null)
-            {
+            if (paramValue != null) {
                 prm.Value = paramValue;
             }
-            else
-            {
+            else {
                 prm.Value = DBNull.Value;
             }
             cmd.Parameters.Add(prm);
@@ -587,12 +542,10 @@ namespace SEDCWebApplication.DAL.Data
             SqlDbType paramType) where T : struct
         {
             SqlParameter prm = new SqlParameter(paramName, paramType);
-            if (propertyValue == null)
-            {
+            if (propertyValue == null) {
                 prm.Value = DBNull.Value;
             }
-            else
-            {
+            else {
                 prm.Value = (int)Convert.ChangeType(propertyValue, typeof(int));
             }
             cmd.Parameters.Add(prm);
@@ -615,12 +568,10 @@ namespace SEDCWebApplication.DAL.Data
             Dictionary<int, TRetValue> dict,
             int key)
         {
-            try
-            {
+            try {
                 return dict[key];
             }
-            catch (KeyNotFoundException)
-            {
+            catch (KeyNotFoundException) {
                 string msg = String.Format("dict key not found. key: {0}, dict type: {1}", key, dict.GetType().FullName);
                 throw new KeyNotFoundException(msg);
             }
@@ -631,12 +582,10 @@ namespace SEDCWebApplication.DAL.Data
             int key)
             where TRetValue : class
         {
-            try
-            {
+            try {
                 return dict[key];
             }
-            catch (KeyNotFoundException)
-            {
+            catch (KeyNotFoundException) {
                 return null;
             }
         }

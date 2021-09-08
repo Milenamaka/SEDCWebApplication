@@ -21,16 +21,16 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                 {
                     Id=1,
                     Name="Pera",
-                    Company="Seavus",
+               
                     Email="pera@gmail.com",
                    ImagePath ="/img/pera.jpg",
-                    Role = RoleEnum.Menager
+                    Role = RoleEnum.Menadzer
         },
                 new EmployeeDTO
                 {
                     Id=2,
                     Name="Mika",
-                    Company="Seavus",
+                  
                     Email="mika@gmail.com",
                     ImagePath ="/img/mika.jpg",
                     Role = RoleEnum.Prodavac
@@ -39,7 +39,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                 {
                     Id=3,
                     Name="Laza",
-                    Company="Seavus",
+               
                     Email="laza@gmail.com",
                     ImagePath ="/img/laza.jpg",
                     Role = RoleEnum.Prodavac

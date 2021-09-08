@@ -1,9 +1,9 @@
-﻿using SEDCWebApplication.DAL.Data.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SEDCWebApplication.DAL.data.Entities;
 
-namespace SEDCWebApplication.DAL.Data.Interfaces
+namespace SEDCWebApplication.DAL.data.Interfaces
 {
     public interface IOrderDAL
     {

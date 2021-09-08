@@ -1,0 +1,9 @@
+﻿@model EmployeeUpdateViewModel
+
+ <div class="card card-user">
+    <img class="card-img-top" src="@Model.ImagePath" alt="Card image" style="width:100%">
+    <div class="card-body">
+        <h4 class="card-title">@Model.Name</h4>
+        <a class="btn btn-primary" asp-controller=@Model.ControllerName asp-action="details" asp-route-id="@Model.Id">See Profile</a>
+    </div>
+</div>

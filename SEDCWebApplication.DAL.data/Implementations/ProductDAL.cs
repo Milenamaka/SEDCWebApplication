@@ -123,7 +123,32 @@ namespace SEDCWebApplication.DAL.data.Implementations
                 cn.Close();
             }
         }
+        public void Delete(Product item)
+        {
+            SqlConnection cn = ConnectionGet();
 
+            SqlCommand cmd = CommandGet(cn);
+            cmd.CommandText = "Product_Del";
+
+            SqlParameter prm = new SqlParameter();
+            prm.ParameterName = "@ID";
+            prm.SqlDbType = SqlDbType.Int;
+            prm.Value = item.Id.Value;
+            cmd.Parameters.Add(prm);
+
+            try {
+                cn.Open();
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex) {
+                //DMLogger.Singleton.LogError(ex, item);
+                throw;
+            }
+            finally {
+                cn.Close();
+            }
+        }
         public List<Product> SearchProducts(string searchParam)
         {
             SqlConnection cn = ConnectionGet();
@@ -179,6 +204,8 @@ namespace SEDCWebApplication.DAL.data.Implementations
             }
             catch (Exception ex) {
                 //DMLogger.Singleton.LogError(LogCategories.SECURITY, ex);
+                
+                
                 throw;
             }
             finally {
@@ -187,7 +214,7 @@ namespace SEDCWebApplication.DAL.data.Implementations
             return results;
         }
 
-
+       
         private void CommonParametersAdd(Product item, SqlCommand cmd)
         {
 

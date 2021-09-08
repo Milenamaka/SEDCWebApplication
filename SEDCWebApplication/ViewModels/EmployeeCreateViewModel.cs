@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SEDCWebApplication.BLL.Logic.Models;
+using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.Models;
 using System;
 using System.Collections.Generic;

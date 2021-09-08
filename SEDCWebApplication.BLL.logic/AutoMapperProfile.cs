@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SEDCWebApplication.BLL.Logic.Models;
-using SEDCWebApplication.DAL.Data.Entities;
+using SEDCWebApplication.BLL.logic.Models;
+using SEDCWebApplication.DAL.data.Entities;
 using System;
 
 namespace SEDCWebApplication.BLL.Logic
@@ -15,6 +15,16 @@ namespace SEDCWebApplication.BLL.Logic
             CreateMap<EmployeeDTO, Employee>()
                 .ForMember(dest => dest.UserName, src => src.MapFrom(src => src.Email))
                     .ForMember(dest => dest.RoleId, src => src.MapFrom(src => src.Role));
+
+
+            CreateMap<Customer, CustomerDTO>();
+
+            CreateMap<CustomerDTO, Customer>();
+
+
+            CreateMap<Product, ProductDTO>();
+
+            CreateMap<ProductDTO, Product>();
 
         }
     }

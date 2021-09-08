@@ -1,11 +1,11 @@
-﻿using SEDCWebApplication.DAL.Data.Entities;
+﻿using SEDCWebApplication.DAL.data.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEDCWebApplication.BLL.Logic.Models
+namespace SEDCWebApplication.BLL.logic.Models
 {
     public class EmployeeDTO
     {

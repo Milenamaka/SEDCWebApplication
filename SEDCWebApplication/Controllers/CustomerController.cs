@@ -26,8 +26,8 @@ namespace SEDCWebApplication.Controllers
             _customerRepository = customerRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-        [Route("ListDTO")]
-        public IActionResult ListDTO()
+        [Route("List")]
+        public IActionResult List()
         {
             List<CustomerDTO> customers = _customerRepository.GetAllCustomers().ToList();
 

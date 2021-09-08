@@ -22,15 +22,15 @@ namespace SEDCWebApplication.Controllers
             _productRepository = productRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-        [Route("ListDTO")]
-        public IActionResult ListDTO()
+        [Route("List")]
+        public IActionResult List()
         {
             List<ProductDTO> productsDTO = _productRepository.GetAllProducts().ToList();
             List<ProductUpdateViewModel> productsVM = new List<ProductUpdateViewModel>();
             foreach (ProductDTO productDTO in productsDTO) {
                 ProductUpdateViewModel productvm = new ProductUpdateViewModel();
                 productvm.ImagePath = productDTO.ImagePath;
-                productvm.ProductName = productDTO.ProductName;
+                productvm.Name = productDTO.ProductName;
                 productvm.Id = (Int32)productDTO.Id;
                 productvm.UnitPrice = productDTO.UnitPrice;
                 productvm.IsDiscounted = productDTO.IsDiscounted;
@@ -49,7 +49,7 @@ namespace SEDCWebApplication.Controllers
         {
             ProductDTO productdto = _productRepository.GetById(id);
             ProductUpdateViewModel productvm = new ProductUpdateViewModel();
-            productvm.ProductName = productdto.ProductName;
+            productvm.Name = productdto.ProductName;
             productvm.Id = (Int32)productdto.Id;
             productvm.UnitPrice = productdto.UnitPrice;
             productvm.IsDiscounted = productdto.IsDiscounted;
@@ -112,7 +112,7 @@ namespace SEDCWebApplication.Controllers
             if (ModelState.IsValid) {
                 ProductDTO product = _productRepository.GetById(changedProduct.Id);
 
-                product.ProductName = changedProduct.ProductName;
+                product.ProductName = changedProduct.Name;
                 product.UnitPrice = changedProduct.UnitPrice;
                 product.IsDiscounted = changedProduct.IsDiscounted;
                 product.Size = changedProduct.Size;

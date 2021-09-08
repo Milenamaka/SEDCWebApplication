@@ -10,7 +10,7 @@ namespace SEDCWebApplication.ViewModels
     {
         public string ImagePath { get; set; }
         [Required]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
 
         public int Id { get; set; }
 
@@ -21,5 +21,6 @@ namespace SEDCWebApplication.ViewModels
         public Boolean IsDiscounted { get; set; }
 
         public String Description { get; set; }
+
     }
 }

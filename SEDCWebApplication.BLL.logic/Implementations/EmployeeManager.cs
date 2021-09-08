@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using SEDCWebApplication.BLL.Logic.Interfaces;
-using SEDCWebApplication.BLL.Logic.Models;
-using SEDCWebApplication.DAL.Data.Entities;
-using SEDCWebApplication.DAL.Data.Interfaces;
+using SEDCWebApplication.BLL.logic.Interfaces;
+using SEDCWebApplication.BLL.logic.Models;
+using SEDCWebApplication.DAL.data.Entities;
+using SEDCWebApplication.DAL.data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;

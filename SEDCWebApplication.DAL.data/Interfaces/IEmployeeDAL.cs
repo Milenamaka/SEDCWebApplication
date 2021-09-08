@@ -1,9 +1,9 @@
-﻿using SEDCWebApplication.DAL.Data.Entities;
+﻿using SEDCWebApplication.DAL.data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SEDCWebApplication.DAL.Data.Interfaces
+namespace SEDCWebApplication.DAL.data.Interfaces
 {
     public interface IEmployeeDAL
     {

@@ -10,12 +10,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SEDCWebApplication.BLL.logic.Implementations;
+using SEDCWebApplication.BLL.logic.Interfaces;
 using SEDCWebApplication.BLL.Logic.Implementations;
-using SEDCWebApplication.BLL.Logic.Interfaces;
-using SEDCWebApplication.DAL.Data.Implementations;
-using SEDCWebApplication.DAL.Data.Interfaces;
-using SEDCWebApplication.Models.Repositories.Implementations;
-using SEDCWebApplication.Models.Repositories.Interfaces;
+using SEDCWebApplication.DAL.data.Implementations;
+using SEDCWebApplication.DAL.data.Interfaces;
+using SEDCWebApplication.Models.IRepository;
+
+using SEDCWebApplication.Models.RepositoryImpl;
+using IEmployeeRepository = SEDCWebApplication.Models.IRepository.IEmployeeRepository;
 
 namespace SEDCWebApplication
 {
@@ -34,15 +37,23 @@ namespace SEDCWebApplication
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(EmployeeManager));
+            services.AddAutoMapper(typeof(CustomerManager));
+            services.AddAutoMapper(typeof(ProductManager));
 
             services.AddScoped<IEmployeeRepository, DatabaseEmployeeRepository>();
+            services.AddScoped<IProductRepository, DatabaseProductRepository>();
+            services.AddScoped<ICustomerRepository, DatabaseCustomerRepository>();
 
 
             //BLL
             services.AddScoped<IEmployeeManager, EmployeeManager>();
+            services.AddScoped<ICustomerManager, CustomerManager>();
+            services.AddScoped<IProductManager, ProductManager>();
 
             //DAL
             services.AddScoped<IEmployeeDAL, EmployeeDAL>();
+            services.AddScoped<ICustomerDAL,CustomerDAL>();
+            services.AddScoped<IProductDAL, ProductDAL>();
             services.AddScoped<IOrderDAL, OrderDAL>();
 
         }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;   
+using System.Threading.Tasks;
+using SEDCWebApplication.DAL.data.Entities;
 
 namespace SEDCWebApplication.BLL.logic.Models
 {
@@ -15,6 +16,8 @@ namespace SEDCWebApplication.BLL.logic.Models
         //public int ContactId { get; set; }
 
         public string Email { get; set; }
+
+        public List<Order> Orders { get; set; }
 
         public string ImagePath { get; set; }
 

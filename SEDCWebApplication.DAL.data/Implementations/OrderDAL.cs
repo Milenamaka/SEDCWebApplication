@@ -62,7 +62,35 @@ namespace SEDCWebApplication.DAL.data.Implementations
             }
             return result;
         }
+        public List<Order> GetByEmployeeId(int id)
+        {
+            SqlConnection cn = ConnectionGet();
 
+            Order result = null;
+            List<Order> results = new List<Order>();
+
+            SqlCommand cmd = CommandGet(cn);
+            cmd.CommandText = "Order_GetByEmployeeId";
+
+            this.ParamValueTypeNonNullableValueSet(cmd, id, "@EmployeeId", SqlDbType.Int);
+
+            try {
+                cn.Open();
+
+                IDataReader reader = cmd.ExecuteReader();
+                while (reader.Read()) {
+                    result = Create(reader);
+                    results.Add(result);
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            finally {
+                cn.Close();
+            }
+            return results;
+        }
 
         private void Add(Order item)
         {
@@ -192,25 +220,24 @@ namespace SEDCWebApplication.DAL.data.Implementations
         private void CommonParametersAdd(Order item, SqlCommand cmd)
         {
 
-
-            this.ParamStringNullableValueSet(cmd, item.UserName, "@UserName", SqlDbType.NVarChar, 50);
+            this.ParamStringNullableValueSet(cmd, item.Number, "@OrderNumber", SqlDbType.NVarChar, 50);
+            /*this.ParamStringNullableValueSet(cmd, item.UserName, "@UserName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Password, "@Password", SqlDbType.NVarChar, 50);
             this.ParamStringNonNullableValueSet(cmd, item.Name, "@OrderName", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.Gender, "@Gender", SqlDbType.NVarChar, 50);
             this.ParamStringNullableValueSet(cmd, item.ImagePath, "@ImagePath", SqlDbType.NVarChar, 200);
             this.ParamValueTypeNonNullableValueSet(cmd, item.RoleId, "@RoleId", SqlDbType.Int);
-            this.ParamValueTypeNonNullableValueSet(cmd, item.DateOfBirth, "@DateOfBirth", SqlDbType.Date);
+            this.ParamValueTypeNonNullableValueSet(cmd, item.DateOfBirth, "@DateOfBirth", SqlDbType.Date);*/
         }
 
         private Order Create(IDataReader reader)
         {
             Order item = new Order(ReaderColumnReadNullableValueType<Int32>(reader, "ID", COLUMN_PREFIX));
 
-            item.Name = ReaderColumnReadObject<string>(reader, "OrderName", COLUMN_PREFIX);
-            item.Gender = ReaderColumnReadObject<string>(reader, "Gender", COLUMN_PREFIX);
-            item.RoleId = ReaderColumnReadValueType<int>(reader, "RoleId", COLUMN_PREFIX);
-            item.DateOfBirth = ReaderColumnReadValueType<DateTime>(reader, "DateOfBirth", COLUMN_PREFIX);
-            item.ImagePath = ReaderColumnReadObject<string>(reader, "ImagePath", COLUMN_PREFIX);
+            item.Number = ReaderColumnReadObject<string>(reader, "OrderNumber", COLUMN_PREFIX);
+            item.TotalAmount = ReaderColumnReadValueType<decimal>(reader, "TotalAmount", COLUMN_PREFIX);
+            item.Status = ReaderColumnReadValueType<int>(reader, "OrderStatusId", COLUMN_PREFIX);
+            item.Date = ReaderColumnReadValueType<DateTime>(reader, "OrderDate", COLUMN_PREFIX);
 
             return item;
         }
