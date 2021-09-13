@@ -1,4 +1,4 @@
-﻿using SEDCWebApplication.DAL.data.Entities;
+﻿using SEDCWebApplicationEntityFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

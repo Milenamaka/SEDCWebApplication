@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.BLL.Logi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.Data", "SEDCWebApplication.DAL.Data\SEDCWebApplication.DAL.Data.csproj", "{9A5CD981-FFFE-4BC5-8CCA-1394F5E2FDBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWeb1API", "SEDCWeb1API\SEDCWeb1API.csproj", "{7A7D1D5A-84C6-4541-89BA-F9F7ADF32438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWeb1API", "SEDCWeb1API\SEDCWeb1API.csproj", "{7A7D1D5A-84C6-4541-89BA-F9F7ADF32438}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplicationEntityFactory", "SEDCWebApplicationEntityFramework\SEDCWebApplicationEntityFactory.csproj", "{E5F3C4D8-9F27-4AE4-885F-800E565722DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{7A7D1D5A-84C6-4541-89BA-F9F7ADF32438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A7D1D5A-84C6-4541-89BA-F9F7ADF32438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A7D1D5A-84C6-4541-89BA-F9F7ADF32438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F3C4D8-9F27-4AE4-885F-800E565722DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F3C4D8-9F27-4AE4-885F-800E565722DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F3C4D8-9F27-4AE4-885F-800E565722DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F3C4D8-9F27-4AE4-885F-800E565722DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B8F4ACC9-6961-4D23-B170-0188D76AC7A0} = {47B82227-A74D-4442-BA86-AFE19FF3AC0C}
 		{9A5CD981-FFFE-4BC5-8CCA-1394F5E2FDBC} = {C09B8379-55B4-4650-8257-2F8418D8129E}
+		{E5F3C4D8-9F27-4AE4-885F-800E565722DF} = {C09B8379-55B4-4650-8257-2F8418D8129E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78B57FE5-25C1-4C66-807E-D640D2827950}

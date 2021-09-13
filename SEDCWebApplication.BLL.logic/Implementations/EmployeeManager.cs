@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using SEDCWebApplication.BLL.logic.Interfaces;
 using SEDCWebApplication.BLL.logic.Models;
-using SEDCWebApplication.DAL.data.Entities;
-using SEDCWebApplication.DAL.data.Interfaces;
+//using SEDCWebApplication.DAL.data.Entities;
+//using SEDCWebApplication.DAL.data.Interfaces;
+using SEDCWebApplicationEntityFactory.Entities;
+using SEDCWebApplicationEntityFactory.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SEDCWebApplication.BLL.Logic.Implementations
+namespace SEDCWebApplication.BLL.logic.Implementations
 {
     public class EmployeeManager : IEmployeeManager
     {
@@ -45,19 +48,16 @@ namespace SEDCWebApplication.BLL.Logic.Implementations
 
         public EmployeeDTO GetEmployeeById(int id)
         {
-            try
-            {
+            try {
                 Employee employee = _employeeDAL.GetById(id);
-                if (employee == null)
-                {
+                if (employee == null) {
                     throw new Exception($"Employee with id {id} not found.");
                 }
-                EmployeeDTO employeeDTO =_mapper.Map<EmployeeDTO>(employee);
-                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.Id);
+                EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
+                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.EmployeeId);
                 return employeeDTO;
             }
-            catch(Exception ex)
-            {
+            catch (Exception ex) {
                 throw ex;
             }
 

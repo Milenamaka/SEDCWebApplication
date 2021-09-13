@@ -4,8 +4,10 @@ using System.Text;
 using AutoMapper;
 using SEDCWebApplication.BLL.logic.Interfaces;
 using SEDCWebApplication.BLL.logic.Models;
-using SEDCWebApplication.DAL.data.Entities;
-using SEDCWebApplication.DAL.data.Interfaces;
+//using SEDCWebApplication.DAL.data.Entities;
+//using SEDCWebApplication.DAL.data.Interfaces;
+using SEDCWebApplicationEntityFactory.Entities;
+using SEDCWebApplicationEntityFactory.Interfaces;
 
 namespace SEDCWebApplication.BLL.logic.Implementations
 {
