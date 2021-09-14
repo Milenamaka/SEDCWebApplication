@@ -10,9 +10,9 @@ using SEDCWebApplication.BLL.logic.Models;
 
 namespace SEDCWeb1API.Controllers
 {
-    [Route("api/customer")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class CustimerController : Controller
+    public class CustomerController : Controller
     {
 
         private readonly ICustomerRepository _customerRepository;
@@ -20,7 +20,7 @@ namespace SEDCWeb1API.Controllers
 
         //private List<Employee> employees;
 
-        public CustimerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
+        public CustomerController(ICustomerRepository customerRepository, IWebHostEnvironment hostingEnvironment)
         {
             _customerRepository = customerRepository;
             _hostingEnvironment = hostingEnvironment;
@@ -29,7 +29,6 @@ namespace SEDCWeb1API.Controllers
 
 
 
-        [Route("all")]
         [HttpGet]
         public IEnumerable<CustomerDTO> Get()
         {
@@ -37,8 +36,7 @@ namespace SEDCWeb1API.Controllers
         }
 
 
-        [Route("{id}")]
-        [HttpGet]
+        [HttpGet("{id}")]
         public CustomerDTO GetById(int id)
         {
             return _customerRepository.GetById(id);
@@ -46,14 +44,9 @@ namespace SEDCWeb1API.Controllers
 
 
         [HttpPost]
-        public CustomerDTO Post([FromBody] CustomerDTO newCustomer)
+        public CustomerDTO Post([FromBody] CustomerDTO customer)
         {
-            CustomerDTO customer = new CustomerDTO {
-                Name = newCustomer.Name,
-                Address = newCustomer.Address,
-                Email = newCustomer.Email,
-                ImagePath = newCustomer.ImagePath
-            };
+           
             return _customerRepository.Add(customer);
         }
 
@@ -62,6 +55,14 @@ namespace SEDCWeb1API.Controllers
         {
         }
 
-       
+
+        [HttpDelete("{id}")]
+        public string Delete(int id)
+        {
+            _customerRepository.Delete(_customerRepository.GetById(id));
+
+            return "Proizvod je obrisan!";
+        }
+
     }
 }

@@ -12,7 +12,7 @@ using SEDCWebApplication.BLL.logic.Models;
 namespace SEDCWeb1API.Controllers
 {
 
-    [Route("api/product")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -24,7 +24,7 @@ namespace SEDCWeb1API.Controllers
             _productRepository = productRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-        [Route("all")]
+       
         [HttpGet]
         public IEnumerable<ProductDTO> Get()
         {
@@ -33,8 +33,8 @@ namespace SEDCWeb1API.Controllers
 
         // GET api/<ProductController>/5
 
-        [Route("{id}")]
-        [HttpGet]
+    
+        [HttpGet("{id}")]
         public ProductDTO GetById(int id)
         {
             return _productRepository.GetById(id);

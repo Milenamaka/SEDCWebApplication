@@ -3,9 +3,10 @@ using SEDCWebApplication.BLL.logic.Interfaces;
 using SEDCWebApplication.BLL.logic.Models;
 //using SEDCWebApplication.DAL.data.Entities;
 //using SEDCWebApplication.DAL.data.Interfaces;
-using SEDCWebApplicationEntityFactory.Entities;
-using SEDCWebApplicationEntityFactory.Interfaces;
-
+//using SEDCWebApplicationEntityFactory.Entities;
+//using SEDCWebApplicationEntityFactory.Interfaces;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,13 +55,21 @@ namespace SEDCWebApplication.BLL.logic.Implementations
                     throw new Exception($"Employee with id {id} not found.");
                 }
                 EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
-                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.EmployeeId);
+                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.Id);
                 return employeeDTO;
             }
             catch (Exception ex) {
                 throw ex;
             }
 
+        }
+        public EmployeeDTO Delete(EmployeeDTO employee)
+        {
+
+            Employee employeeEntity = _mapper.Map<Employee>(employee);
+            _employeeDAL.Delete(employeeEntity);
+            employee = _mapper.Map<EmployeeDTO>(employeeEntity);
+            return employee;
         }
     }
 }

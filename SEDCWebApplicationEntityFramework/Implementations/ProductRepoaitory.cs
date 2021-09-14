@@ -34,7 +34,10 @@ namespace SEDCWebApplicationEntityFactory.Implementations
 
         public void Save(Product item)
         {
-            throw new NotImplementedException();
+            using (var db = new PizzaShop1Context()) {
+                db.Products.Add(item);
+                db.SaveChanges();
+            }
         }
     }
 }

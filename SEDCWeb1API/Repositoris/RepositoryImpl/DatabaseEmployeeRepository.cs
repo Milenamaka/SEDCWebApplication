@@ -38,5 +38,9 @@ namespace SEDCWeb1API.RepositoryImpl
         {
             return _employeeManager.Add(employee);
         }
+        public EmployeeDTO Delete(EmployeeDTO employee)
+        {
+            return _employeeManager.Delete(employee);
+        }
     }
 }

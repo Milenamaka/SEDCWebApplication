@@ -1,4 +1,4 @@
-﻿using SEDCWebApplicationEntityFactory.Entities;
+﻿using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +11,7 @@ namespace SEDCWebApplication.BLL.logic.Models
     {
         public int? Id { get; set; }
 
-        [Required(ErrorMessage = "Ime je obavezno")]
+       
         public string Name { get; set; }
 
         public string Email { get; set; }

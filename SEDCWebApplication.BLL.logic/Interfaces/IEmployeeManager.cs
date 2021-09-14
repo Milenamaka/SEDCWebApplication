@@ -10,5 +10,6 @@ namespace SEDCWebApplication.BLL.logic.Interfaces
         IEnumerable<EmployeeDTO> GetAllEmployees();
         EmployeeDTO GetEmployeeById(int id);
         EmployeeDTO Add(EmployeeDTO employee);
+        EmployeeDTO Delete(EmployeeDTO employee);
     }
 }

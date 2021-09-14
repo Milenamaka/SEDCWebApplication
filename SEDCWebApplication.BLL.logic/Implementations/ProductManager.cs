@@ -4,10 +4,12 @@ using System.Text;
 using AutoMapper;
 using SEDCWebApplication.BLL.logic.Interfaces;
 using SEDCWebApplication.BLL.logic.Models;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 //using SEDCWebApplication.DAL.data.Entities;
 //using SEDCWebApplication.DAL.data.Interfaces;
-using SEDCWebApplicationEntityFactory.Entities;
-using SEDCWebApplicationEntityFactory.Interfaces;
+//using SEDCWebApplicationEntityFactory.Entities;
+//using SEDCWebApplicationEntityFactory.Interfaces;
 
 namespace SEDCWebApplication.BLL.logic.Implementations
 {
@@ -40,7 +42,7 @@ namespace SEDCWebApplication.BLL.logic.Implementations
 
         public IEnumerable<ProductDTO> GetAllProducts()
         {
-            return _mapper.Map<List<ProductDTO>>(_productDAL.GetAllProducts(0, 50));
+            return _mapper.Map<List<ProductDTO>>(_productDAL.GetAll(0, 50));
         }
 
         public ProductDTO GetById(int id)

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEDCWeb1API.IRepository;
 using SEDCWebApplication.BLL.logic.Models;
 
 
 
 namespace SEDCWeb1API.RepositoryImpl
 {
-    public class MockCustomerRepository 
+    public class MockCustomerRepository : ICustomerRepository
     {
         private List<CustomerDTO> _customerList;
         public MockCustomerRepository()
@@ -59,6 +60,10 @@ namespace SEDCWeb1API.RepositoryImpl
             return _customerList.Where(x => x.Id == customer.Id).FirstOrDefault();
         }
 
+        public CustomerDTO Delete(CustomerDTO customer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

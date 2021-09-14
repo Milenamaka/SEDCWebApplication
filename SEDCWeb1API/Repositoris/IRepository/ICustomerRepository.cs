@@ -13,5 +13,7 @@ namespace SEDCWeb1API.IRepository
         CustomerDTO GetById(int id);
 
         CustomerDTO Add(CustomerDTO customer);
+
+        CustomerDTO Delete(CustomerDTO customer);
     }
 }

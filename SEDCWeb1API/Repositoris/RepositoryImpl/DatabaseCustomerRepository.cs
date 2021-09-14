@@ -30,6 +30,10 @@ namespace SEDCWeb1API.RepositoryImpl
         {
             return _customerManager.Add(customer);
         }
+        public CustomerDTO Delete(CustomerDTO customer)
+        {
+            return _customerManager.Delete(customer);
+        }
     }
 }
 

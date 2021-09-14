@@ -11,5 +11,7 @@ namespace SEDCWebApplication.BLL.logic.Interfaces
         CustomerDTO GetCustomerById(int id);
 
         CustomerDTO Add(CustomerDTO customer);
+
+        CustomerDTO Delete(CustomerDTO customer);
     }
 }

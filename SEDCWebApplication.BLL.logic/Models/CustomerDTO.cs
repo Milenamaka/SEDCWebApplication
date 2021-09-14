@@ -8,10 +8,10 @@ using SEDCWebApplication.DAL.data.Entities;
 namespace SEDCWebApplication.BLL.logic.Models
 {
 	public class CustomerDTO
-	{   [Required]
+	{  
 		public int? Id { get; set; }
         public string Name { get; set; }
-        [EmailAddress]
+        
         public string Address { get; set; }
         //public int ContactId { get; set; }
 

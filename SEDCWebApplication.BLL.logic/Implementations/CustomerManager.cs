@@ -4,8 +4,10 @@ using System.Text;
 using AutoMapper;
 using SEDCWebApplication.BLL.logic.Interfaces;
 using SEDCWebApplication.BLL.logic.Models;
-using SEDCWebApplicationEntityFactory.Entities;
-using SEDCWebApplicationEntityFactory.Interfaces;
+//using SEDCWebApplicationEntityFactory.Entities;
+//using SEDCWebApplicationEntityFactory.Interfaces;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
+using SEDCWebApplication.DAL.DatabaseFactory.Interfaces;
 
 namespace SEDCWebApplication.BLL.logic.Implementations
 {
@@ -35,6 +37,16 @@ namespace SEDCWebApplication.BLL.logic.Implementations
         public CustomerDTO GetCustomerById(int id)
         {
             return _mapper.Map<CustomerDTO>(_customerDAL.GetById(id));
+        }
+
+
+        public CustomerDTO Delete(CustomerDTO customer)
+        {
+
+            Customer customerEntity = _mapper.Map<Customer>(customer);
+            _customerDAL.Delete(customerEntity);
+            customer = _mapper.Map<CustomerDTO>(customerEntity);
+            return customer;
         }
     }
 }

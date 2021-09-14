@@ -11,7 +11,7 @@ using SEDCWebApplication.BLL.logic.Models;
 
 namespace SEDCWeb1API.Controllers
 {
-    [Route("api/employee")]
+    [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -29,15 +29,15 @@ namespace SEDCWeb1API.Controllers
         }
 
         // GET: api/<EmployeeController>
-        [HttpGet]
+      
 
-        [Route("all")]
+        [HttpGet]
         public IEnumerable<EmployeeDTO> Get()
         {
             return _employeeRepository.GetAllEmployees();
         }
 
-        [Route("{id}")]
+
         [HttpGet("{id}")]
         public EmployeeDTO Get(int id)
         {
@@ -46,9 +46,9 @@ namespace SEDCWeb1API.Controllers
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] EmployeeDTO employee)
+        public EmployeeDTO Post([FromBody] EmployeeDTO employee)
         {
-            _employeeRepository.Add(employee);
+            return _employeeRepository.Add(employee);
         }
 
         // PUT api/<EmployeeController>/5
@@ -59,8 +59,11 @@ namespace SEDCWeb1API.Controllers
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            _employeeRepository.Delete(_employeeRepository.GetEmployeeById(id));
+
+            return "Proizvod je obrisan!";
         }
     }
 }
