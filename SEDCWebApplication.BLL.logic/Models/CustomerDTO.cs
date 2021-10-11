@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using SEDCWebApplication.DAL.data.Entities;
+using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 
 namespace SEDCWebApplication.BLL.logic.Models
 {
@@ -17,7 +17,7 @@ namespace SEDCWebApplication.BLL.logic.Models
 
         public string Email { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public List<OrderDTO> Orders { get; set; }
 
         public string ImagePath { get; set; }
 

@@ -45,7 +45,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             using (var db = new ApplicationDbContext(optionBuilder.Options)) 
             {
 
-                Order result = db.Orders.First(e => e.Id == id);
+                Order result = db.Orders.First(e => e.OrderId == id);
                 return result;
 
             }
@@ -61,5 +61,19 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
             }
              
         }
+
+
+        public void Delete(Order item)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options)) {
+                db.Orders.Remove(item);
+                db.SaveChanges();
+            }
+        }
+
+
+
+
     }
 }

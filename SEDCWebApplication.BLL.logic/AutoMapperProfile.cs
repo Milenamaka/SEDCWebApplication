@@ -4,15 +4,18 @@ using SEDCWebApplication.BLL.logic.Models;
 using SEDCWebApplication.DAL.DatabaseFactory.Entities;
 using SEDCWebApplication.DAL.data.Entities;
 using System;
+using SEDCWebApplication.BLL.logic.Helpers;
+using Microsoft.Extensions.Configuration;
 
 
-namespace SEDCWebApplication.BLL.Logic
+namespace SEDCWebApplication.BLL.logic
 {
     public class AutoMapperProfile : Profile
     {
 
-        public AutoMapperProfile()
+        public AutoMapperProfile(IConfiguration configuration)
         {
+          
             CreateMap<DAL.data.Entities.Employee, EmployeeDTO>();
 
             CreateMap<EmployeeDTO, DAL.data.Entities.Employee>()
@@ -47,8 +50,6 @@ namespace SEDCWebApplication.BLL.Logic
                     .ForMember(dest => dest.CustomerId, src => src.MapFrom(src => src.Id));
 
 
-
-
             CreateMap<DAL.data.Entities.Product, ProductDTO>();
 
             CreateMap<ProductDTO, DAL.data.Entities.Product>();
@@ -77,19 +78,31 @@ namespace SEDCWebApplication.BLL.Logic
 
             CreateMap<ProductDTO, DAL.DatabaseFactory.Entities.Product>();
 
+            CreateMap<DAL.DatabaseFactory.Entities.Order, OrderDTO>();
+
+            CreateMap<OrderDTO, DAL.DatabaseFactory.Entities.Order>();
+
+
+            CreateMap<DAL.DatabaseFactory.Entities.OrderItem, OrderItemDTO>();
+
+            CreateMap<OrderItemDTO, DAL.DatabaseFactory.Entities.OrderItem>();
+
+            CreateMap<DAL.DatabaseFactory.Entities.User, UserDTO>();
+
+
+            CreateMap<DAL.DatabaseFactory.Entities.User, UserDTO>()
+                .ForMember(dest => dest.Role, src => src.MapFrom(src => EnumHelper.GetString<RoleEnum>(src.RoleId)));
 
 
 
+            CreateMap<DAL.DatabaseFactory.Entities.Employee, EmployeeDTO>()
+         .ForMember(dest => dest.Id, src => src.MapFrom(src => src.Id))
+         .ForMember(dest => dest.Role, src => src.MapFrom(src => src.RoleId))
+         .ForMember(dest => dest.ImagePath, src => src.MapFrom(src => (new ImageHelper(configuration)).GetFullImagePath(src.ImagePath)));
 
-
-
-
-
-
-
-
-
-
+            CreateMap<EmployeeDTO, DAL.DatabaseFactory.Entities.Employee>()
+                .ForMember(dest => dest.Name, src => src.MapFrom(src => src.Email))
+                    .ForMember(dest => dest.RoleId, src => src.MapFrom(src => src.Role));
 
 
 

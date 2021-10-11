@@ -21,7 +21,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -41,11 +41,41 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("customerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("customerId");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", b =>
@@ -95,8 +125,14 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -118,10 +154,6 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Customer_ImagePath");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Customer_Name");
@@ -139,16 +171,22 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
                     b.HasDiscriminator().HasValue("Employee");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 5,
+                            Password = "markovic",
+                            RoleId = 2,
+                            UserName = "marko",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Gender = "M",
+                            Name = "Marko"
+                        });
                 });
 
             modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Order", b =>
@@ -157,7 +195,35 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Migrations
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
+                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Customer", "customer")
+                        .WithMany()
+                        .HasForeignKey("customerId");
+
+                    b.Navigation("customer");
+
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.OrderItem", b =>
+                {
+                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Order", "order")
+                        .WithMany("orderItems")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("SEDCWebApplication.DAL.DatabaseFactory.Entities.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("order");
+
+                    b.Navigation("product");
+                });
+
+            modelBuilder.Entity("SEDCWebApplication.DAL.DatabaseFactory.Entities.Order", b =>
+                {
+                    b.Navigation("orderItems");
                 });
 #pragma warning restore 612, 618
         }

@@ -24,7 +24,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                
                     Email="pera@gmail.com",
                    ImagePath ="/img/pera.jpg",
-                    Role = RoleEnum.Menadzer
+                    Role = RoleEnum.Manager
         },
                 new EmployeeDTO
                 {
@@ -33,7 +33,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                   
                     Email="mika@gmail.com",
                     ImagePath ="/img/mika.jpg",
-                    Role = RoleEnum.Prodavac
+                    Role = RoleEnum.Sales
                 },
                 new EmployeeDTO
                 {
@@ -42,7 +42,7 @@ namespace SEDCWebApplication.Models.RepositoryImpl
                
                     Email="laza@gmail.com",
                     ImagePath ="/img/laza.jpg",
-                    Role = RoleEnum.Prodavac
+                    Role = RoleEnum.Sales
         }
             };
         }

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj" />
-    <ProjectReference Include="..\SEDCWebApplication.DAL.Data\SEDCWebApplication.DAL.Data.csproj" />
+    <ProjectReference Include="..\SEDCWebApplication.DAL.Data\SEDCWebApplication.DAL.data.csproj" />
     <ProjectReference Include="..\SEDCWebApplicationEntityFramework\SEDCWebApplicationEntityFactory.csproj" />
   </ItemGroup>
 

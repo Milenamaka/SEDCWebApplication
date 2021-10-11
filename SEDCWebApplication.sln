@@ -9,15 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{47B82227-A74
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{C09B8379-55B4-4650-8257-2F8418D8129E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.BLL.Logic", "SEDCWebApplication.BLL.Logic\SEDCWebApplication.BLL.Logic.csproj", "{B8F4ACC9-6961-4D23-B170-0188D76AC7A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.BLL.logic", "SEDCWebApplication.BLL.Logic\SEDCWebApplication.BLL.logic.csproj", "{B8F4ACC9-6961-4D23-B170-0188D76AC7A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.Data", "SEDCWebApplication.DAL.Data\SEDCWebApplication.DAL.Data.csproj", "{9A5CD981-FFFE-4BC5-8CCA-1394F5E2FDBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.data", "SEDCWebApplication.DAL.Data\SEDCWebApplication.DAL.data.csproj", "{9A5CD981-FFFE-4BC5-8CCA-1394F5E2FDBC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWeb1API", "SEDCWeb1API\SEDCWeb1API.csproj", "{7A7D1D5A-84C6-4541-89BA-F9F7ADF32438}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplicationEntityFactory", "SEDCWebApplicationEntityFramework\SEDCWebApplicationEntityFactory.csproj", "{E5F3C4D8-9F27-4AE4-885F-800E565722DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.DAL.DatabaseFactory", "SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj", "{B0C17240-ED1D-49D3-B4F8-A65C6B9FB758}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEDCWebApplication.DAL.DatabaseFactory", "SEDCWebApplication.DAL.DatabaseFactory\SEDCWebApplication.DAL.DatabaseFactory.csproj", "{B0C17240-ED1D-49D3-B4F8-A65C6B9FB758}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{062BFA9F-6D0B-460E-A7A0-8DE34E85030B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDCWebApplication.Tests.WebAPI.XUnitTest", "SEDCWebApplication.Tests.WebAPI.XUnitTest\SEDCWebApplication.Tests.WebAPI.XUnitTest.csproj", "{1403E2D5-0A3C-477C-B586-E53771200526}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{B0C17240-ED1D-49D3-B4F8-A65C6B9FB758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C17240-ED1D-49D3-B4F8-A65C6B9FB758}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0C17240-ED1D-49D3-B4F8-A65C6B9FB758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1403E2D5-0A3C-477C-B586-E53771200526}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1403E2D5-0A3C-477C-B586-E53771200526}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1403E2D5-0A3C-477C-B586-E53771200526}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1403E2D5-0A3C-477C-B586-E53771200526}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,7 @@ Global
 		{9A5CD981-FFFE-4BC5-8CCA-1394F5E2FDBC} = {C09B8379-55B4-4650-8257-2F8418D8129E}
 		{E5F3C4D8-9F27-4AE4-885F-800E565722DF} = {C09B8379-55B4-4650-8257-2F8418D8129E}
 		{B0C17240-ED1D-49D3-B4F8-A65C6B9FB758} = {C09B8379-55B4-4650-8257-2F8418D8129E}
+		{1403E2D5-0A3C-477C-B586-E53771200526} = {062BFA9F-6D0B-460E-A7A0-8DE34E85030B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78B57FE5-25C1-4C66-807E-D640D2827950}

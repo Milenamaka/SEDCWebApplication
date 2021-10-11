@@ -13,5 +13,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Interfaces
         List<Order> GetByEmployeeId(int id);
 
         List<Order> GetAll(int skip, int take);
+
+        void Delete(Order item);
     }
 }

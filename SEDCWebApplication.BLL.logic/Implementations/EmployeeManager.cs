@@ -55,7 +55,7 @@ namespace SEDCWebApplication.BLL.logic.Implementations
                     throw new Exception($"Employee with id {id} not found.");
                 }
                 EmployeeDTO employeeDTO = _mapper.Map<EmployeeDTO>(employee);
-                employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.Id);
+                //employeeDTO.Orders = _orderDAL.GetByEmployeeId((int)employee.Id);
                 return employeeDTO;
             }
             catch (Exception ex) {

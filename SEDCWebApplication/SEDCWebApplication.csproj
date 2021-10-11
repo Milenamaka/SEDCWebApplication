@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SEDCWebApplication.BLL.Logic\SEDCWebApplication.BLL.Logic.csproj" />
+    <ProjectReference Include="..\SEDCWebApplication.BLL.Logic\SEDCWebApplication.BLL.logic.csproj" />
   </ItemGroup>
 
 </Project>

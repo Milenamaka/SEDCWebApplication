@@ -2,42 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using SEDCWeb1API.IRepository;
+using SEDCWeb1API.Helpers;
+using SEDCWeb1API.Service.Interfaces;
 using SEDCWebApplication.BLL.logic.Models;
+using Serilog;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SEDCWeb1API.Controllers
 {
 
+    [EnableCors("mypolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
 
-        private readonly IProductRepository _productRepository;
+        private readonly IProductService _productService;
         private readonly IHostingEnvironment _hostingEnvironment;
-        public ProductController(IProductRepository productRepository, IHostingEnvironment hostingEnvironment)
+        private readonly ILogger _logger;
+        public ProductController(IProductService productService, ILogger logger, IHostingEnvironment hostingEnvironment)
         {
-            _productRepository = productRepository;
+            _productService = productService;
             _hostingEnvironment = hostingEnvironment;
+            _logger = logger;
         }
-       
+
+        [Authorize(Roles = AuthorizationRoles.Admin)]
         [HttpGet]
-        public IEnumerable<ProductDTO> Get()
+        public ActionResult<IEnumerable<ProductDTO>> Get()
         {
-            return _productRepository.GetAllProducts();
+
+
+            List<ProductDTO> products = _productService.GetAllProducts().ToList();
+
+            return Ok(products);
         }
 
         // GET api/<ProductController>/5
 
-    
+        [Authorize(Roles = AuthorizationRoles.Admin)]
         [HttpGet("{id}")]
-        public ProductDTO GetById(int id)
+        public ActionResult<ProductDTO> GetById(int id)
         {
-            return _productRepository.GetById(id);
+            return Ok(_productService.GetById(id));
         }
 
         // POST api/<ProductController>
@@ -52,7 +64,7 @@ namespace SEDCWeb1API.Controllers
                 IsDiscounted = newProduct.IsDiscounted,
                 ImagePath = newProduct.ImagePath
             };
-            return _productRepository.Add(product);
+            return _productService.Add(product);
         }
 
         // PUT api/<ProductController>/5
@@ -65,7 +77,7 @@ namespace SEDCWeb1API.Controllers
         [HttpDelete("{id}")]
         public string Delete(int id)
         {
-            _productRepository.Delete(_productRepository.GetById(id));
+            _productService.Delete(_productService.GetById(id));
 
             return "Proizvod je obrisan!";
         }

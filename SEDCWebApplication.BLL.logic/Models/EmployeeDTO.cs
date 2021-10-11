@@ -15,10 +15,10 @@ namespace SEDCWebApplication.BLL.logic.Models
         public string Name { get; set; }
 
         public string Email { get; set; }
+
+        public List<OrderDTO> Orders { get; set; }
+
         public RoleEnum Role { get; set; }
-
-        public List<Order> Orders { get; set; }
-
         public string ImagePath { get; set; }
 
         public bool Test { get; set; }
