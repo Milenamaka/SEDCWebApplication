@@ -18,19 +18,23 @@ namespace SEDCWebApplication.BLL.logic.Implementations
 
         private readonly IOrderDAL _orderDAL;
         private readonly IProductDAL _productDAL;
+        private readonly ICustomerDAL _customerDAL;
         private readonly IMapper _mapper;
-        public OrderManager(IOrderDAL ordertDAL, IProductDAL productDAL, IOrderItemDAL orderItem, IMapper mapper)
+        public OrderManager(IOrderDAL ordertDAL, IProductDAL productDAL, IOrderItemDAL orderItem, ICustomerDAL customerDAL, IMapper mapper)
         {
             _orderDAL = ordertDAL;
             _productDAL = productDAL;
+            _customerDAL = customerDAL;
             _mapper = mapper;
         }
-        public OrderDTO Add(OrderDTOnew orderDTO)
+        public OrderDTO Add(OrderDTOnew orderDTO, int userId)
         {
             Order order = new Order();
             order.TotalAmount = 0;
             //order.Number = CreateOrderNumber();
             order.Status = 1;
+            order.customerId = userId;
+            order.Date = DateTime.Now;
             order.orderItems = new List<OrderItem>();
             foreach (OrderItemDTOnew orderItemDTO in orderDTO.OrderItems) {
              Product product = _productDAL.GetById((int)orderItemDTO.orderItem);
@@ -69,6 +73,11 @@ namespace SEDCWebApplication.BLL.logic.Implementations
         private string CreateOrderNumber()
         {
             return "N";
+        }
+
+        public IEnumerable<OrderDTO> GetByCustomerId(int id)
+        {
+            return _mapper.Map<List<OrderDTO>>(_orderDAL.GetByCustomerId(id));
         }
     }
 }

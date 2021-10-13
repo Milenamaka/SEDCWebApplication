@@ -73,6 +73,16 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Implementations
         }
 
 
+        public List<Order> GetByCustomerId(int id)
+        {
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(Configuration.GetConnectionString("SEDC2"));
+            using (var db = new ApplicationDbContext(optionBuilder.Options)) {
+                List<Order> result = db.Orders
+                  .Include(o => o.customer).Where(e => e.customer.Id == id).ToList();
+               //   .thenInclude(o => o.product).Where(e => e.customer.Id == id).ToList();
+                return result;
+            }
+        }
 
 
     }

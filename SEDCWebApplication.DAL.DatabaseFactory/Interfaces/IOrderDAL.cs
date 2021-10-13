@@ -15,5 +15,7 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Interfaces
         List<Order> GetAll(int skip, int take);
 
         void Delete(Order item);
+
+        List<Order> GetByCustomerId(int id);
     }
 }

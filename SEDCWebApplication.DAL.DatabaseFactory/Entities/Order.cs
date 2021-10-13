@@ -13,6 +13,8 @@ namespace SEDCWebApplication.DAL.DatabaseFactory.Entities
         public DateTime Date { get; set; }
         public decimal TotalAmount { get; set; }
         public int Status { get; set; }
+
+        public int customerId { get; set; }
         public List<OrderItem> orderItems { get; set; }
         public Employee Employee { get; set; }
         public Customer customer { get; set; }

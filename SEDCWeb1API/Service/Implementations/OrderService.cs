@@ -37,13 +37,18 @@ namespace SEDCWeb1API.Service.Implementations
 
         }
 
-        public OrderDTO Add(OrderDTOnew order)
+        public OrderDTO Add(OrderDTOnew order, int userId)
         {
-            return _orderManager.Add(order);
+            return _orderManager.Add(order, userId);
         }
         public OrderDTO Delete(OrderDTO order)
         {
             return _orderManager.Delete(order);
+        }
+
+        public IEnumerable<OrderDTO> GetOrdersByCustomerId(int id)
+        {
+            return _orderManager.GetByCustomerId(id);
         }
     }
 }

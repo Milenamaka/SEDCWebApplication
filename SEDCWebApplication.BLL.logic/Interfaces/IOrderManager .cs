@@ -10,8 +10,10 @@ namespace SEDCWebApplication.BLL.logic.Interfaces
         IEnumerable<OrderDTO> GetAllOrders();
         OrderDTO GetById(int id);
 
-        OrderDTO Add(OrderDTOnew order);
+        OrderDTO Add(OrderDTOnew order, int userId);
 
         OrderDTO Delete(OrderDTO order);
+
+        IEnumerable<OrderDTO> GetByCustomerId(int id);
     }
 }

@@ -15,7 +15,7 @@ using Serilog;
 
 namespace SEDCWeb1API.Controllers
 {
-    [EnableCors("nyolicy")]
+    [EnableCors("nypolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase

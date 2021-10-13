@@ -13,6 +13,7 @@ using SEDCWebApplication.BLL.logic.Models;
 
 namespace SEDCWeb1API.Controllers
 {
+
     [EnableCors("mypolicy")]
     [Route("api/[controller]")]
     [ApiController]
@@ -50,15 +51,25 @@ namespace SEDCWeb1API.Controllers
         }
 
 
-       
+        [Authorize(Roles = AuthorizationRoles.Client)]
         [HttpPost]
 
         public OrderDTO Post([FromBody] OrderDTOnew order)
         {
             UserDTO user = (UserDTO)HttpContext.Items["User"];
-            return _orderService.Add(order);
+            return _orderService.Add(order, user.Id);
         }
 
+
+        // GET: api/<OrderController>
+        [Route("my")]
+        [Authorize(Roles = AuthorizationRoles.Client)]
+        [HttpGet]
+        public IEnumerable<OrderDTO> GetAllMyOrders()
+        {
+            UserDTO user = (UserDTO)HttpContext.Items["User"];
+            return _orderService.GetOrdersByCustomerId(user.Id);
+        }
 
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
